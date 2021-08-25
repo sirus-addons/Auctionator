@@ -1,0 +1,239 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorShoppingListTabFrameTemplate" virtual="true" parentKey="AuctionatorShoppingListFrame" hidden="true">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorShoppingListTabMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnEvent>self:OnEvent(event, ...)</OnEvent>
+    </Scripts>
+
+    <Anchors>
+      <Anchor point="TOP" relativeTo="$parentCategoriesList" relativePoint="TOP" y="-30"/>
+      <Anchor point="LEFT" x="4"/>
+      <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-4" y="27"/>
+    </Anchors>
+
+    <Frames>
+      <Frame name="$parentDataProvider" parentKey="DataProvider">
+        <Scripts>
+          <OnLoad>
+            Mixin(self, AuctionatorShoppingListDataProviderMixin)
+            self:OnLoad()
+          </OnLoad>
+          <OnUpdate>self:OnUpdate(elapsed)</OnUpdate>
+        </Scripts>
+      </Frame>
+
+      <!-- Shopping List Dropdown -->
+      <Frame name="$parentListDropdown" inherits="UIDropDownMenuTemplate" parentKey="ListDropdown">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="50" y="55"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>
+            Mixin(self, AuctionatorShoppingListDropdownMixin)
+            self:OnLoad()
+          </OnLoad>
+          <OnShow>self:OnShow()</OnShow>
+          <OnEvent>self:OnEvent(event, ...)</OnEvent>
+        </Scripts>
+      </Frame>
+
+      <!-- List Create/Delete Buttons -->
+      <Button name="$parentCreateList" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_CREATE" parentKey="CreateList">
+        <Anchors>
+          <Anchor point="LEFT" relativeTo="$parentListDropdown" relativePoint="RIGHT" x="-12" y="2"/>
+        </Anchors>
+        <Scripts>
+           <OnLoad>
+            Mixin(self, AuctionatorListCreateButtonMixin)
+            self:OnLoad()
+          </OnLoad>
+          <OnClick>self:OnClick(button)</OnClick>
+        </Scripts>
+      </Button>
+
+      <Button name="$parentDeleteList" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_DELETE" parentKey="DeleteList">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentCreateList" relativePoint="TOPRIGHT" x="3"/>
+        </Anchors>
+        <Scripts>
+           <OnLoad>
+            Mixin(self, AuctionatorListDeleteButtonMixin)
+            self:OnLoad()
+          </OnLoad>
+          <OnClick>self:OnClick(button)</OnClick>
+        </Scripts>
+      </Button>
+
+      <!-- List Rename Button -->
+      <Button name="$parentRename" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_RENAME" parentKey="Rename">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentDeleteList" relativePoint="TOPRIGHT" x="3"/>
+        </Anchors>
+        <Scripts>
+           <OnLoad>
+            Mixin(self, AuctionatorListRenameButtonMixin)
+            self:OnLoad()
+          </OnLoad>
+          <OnClick>self:OnClick(button)</OnClick>
+        </Scripts>
+      </Button>
+
+      <!-- List export/Import -->
+      <Button name="$parentImport" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_IMPORT" parentKey="Import">
+        <Anchors>
+          <Anchor point="TOP" relativeTo="$parentRename" relativePoint="TOP"/>
+          <Anchor point="RIGHT" relativePoint="RIGHT" x="-8" y="55"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>self:GetParent():ImportListsClicked()</OnClick>
+        </Scripts>
+      </Button>
+
+      <Button name="$parentExport" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_EXPORT" parentKey="Export">
+        <Anchors>
+          <Anchor point="TOP" relativeTo="$parentRename" relativePoint="TOP"/>
+          <Anchor point="RIGHT" relativeTo="$parentImport" relativePoint="LEFT" x="-3"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>self:GetParent():ExportListsClicked()</OnClick>
+        </Scripts>
+      </Button>
+
+      <!-- Shopping List item scroll frame -->
+      <Frame name="$parentScrollList" parentKey="ScrollList">
+        <Anchors>
+          <Anchor point="TOPLEFT" y="-3"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" x="300" y="35"/>
+        </Anchors>
+        <Frames>
+          <ScrollFrame name="$parentScrollFrame" parentKey="ScrollFrame" inherits="HybridScrollFrameTemplate">
+          <Anchors>
+            <Anchor point="TOPLEFT" x="4" y="-7"/>
+            <Anchor point="BOTTOMRIGHT" x="-28" y="3"/>
+          </Anchors>
+            <Frames>
+              <Slider name="$parentScrollBar" parentKey="scrollBar" inherits="HybridScrollBarTemplate">
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="4" y="-10"/>
+                  <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="4" y="12"/>
+                </Anchors>
+                <Layers>
+                  <Layer level="BACKGROUND">
+                    <Texture parentKey="Background" file="Interface\FrameGeneral\UI-Background-Marble" horizTile="true" vertTile="true" setAllPoints="true"/>
+                  </Layer>
+                </Layers>
+              </Slider>
+            </Frames>
+          </ScrollFrame>
+          <Frame name="$parentInsetFrame" parentKey="InsetFrame" inherits="InsetFrameTemplate">
+            <Anchors>
+              <Anchor point="TOPLEFT"/>
+              <Anchor point="BOTTOMRIGHT" relativeTo="$parentScrollFrame" relativePoint="BOTTOMRIGHT"/>
+            </Anchors>
+            <Layers>
+              <Layer level="OVERLAY">
+                <Texture name="$parentLoadingSpinner" parentKey="LoadingSpinner" hidden="true">
+                  <Size x="146" y="146"/>
+                  <Anchors>
+                    <Anchor point="CENTER" x="-12" y="-13"/>
+                  </Anchors>
+                  <Animations>
+                    <AnimationGroup parentKey="SpinnerAnim" looping="REPEAT">
+                      <Rotation order="1" duration="1" degrees="-360"/>
+                    </AnimationGroup>
+                  </Animations>
+                </Texture>
+                <FontString parentKey="ResultsText" inherits="GameFontNormal" hidden="true">
+                  <Anchors>
+                    <Anchor point="TOP" relativeTo="$parentLoadingSpinner" relativePoint="CENTER" x="0" y="24"/>
+                    <Anchor point="LEFT" x="45" y="0"/>
+                    <Anchor point="RIGHT" x="-67" y="0"/>
+                    <Anchor point="BOTTOM" relativeTo="$parentLoadingSpinner" relativePoint="CENTER" x="0" y="-24"/>
+                  </Anchors>
+                  <Shadow>
+                    <Offset>
+                      <AbsDimension x="1" y="-1"/>
+                    </Offset>
+                    <Color r="0" g="0" b="0"/>
+                  </Shadow>
+                </FontString>
+              </Layer>
+            </Layers>
+          </Frame>
+        </Frames>
+        <Scripts>
+           <OnLoad>
+            Mixin(self, AuctionatorScrollListMixin)
+            self:OnLoad()
+
+            self.InsetFrame.Bgs:SetAllPoints(true)
+            self.InsetFrame.Bgs:SetAtlas("auctionhouse-background-sell-right")
+            self.InsetFrame.InsetBorderTopLeft:SetDrawLayer("ARTWORK")
+            self.InsetFrame.InsetBorderTopRight:SetDrawLayer("ARTWORK")
+            self.InsetFrame.InsetBorderBottomLeft:SetDrawLayer("ARTWORK")
+            self.InsetFrame.InsetBorderBottomRight:SetDrawLayer("ARTWORK")
+            self.InsetFrame.InsetBorderTop:SetDrawLayer("ARTWORK")
+            self.InsetFrame.InsetBorderBottom:SetDrawLayer("ARTWORK")
+            self.InsetFrame.InsetBorderLeft:SetDrawLayer("ARTWORK")
+            self.InsetFrame.InsetBorderRight:SetDrawLayer("ARTWORK")
+            self.InsetFrame.LoadingSpinner:SetAtlas("auctionhouse-ui-loadingspinner")
+          </OnLoad>
+          <OnShow>self:OnShow()</OnShow>
+          <OnEvent>self:OnEvent(event, ...)</OnEvent>
+        </Scripts>
+      </Frame>
+
+      <!-- List Add Item Button -->
+      <Button name="$parentAddItem" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_ADD_ITEM" parentKey="AddItem">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentScrollList" relativePoint="BOTTOMLEFT" x="4" y="-4"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>self:GetParent():AddItemClicked()</OnClick>
+        </Scripts>
+      </Button>
+
+      <!-- List Manual Search Button -->
+      <Button name="$parentManualSearch" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_SEARCH" parentKey="ManualSearch">
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativeTo="$parentScrollList" relativePoint="BOTTOMRIGHT" x="-25" y="-4"/>
+        </Anchors>
+        <Scripts>
+           <OnLoad>
+            Mixin(self, AuctionatorListSearchButtonMixin)
+            self:OnLoad()
+          </OnLoad>
+          <OnClick>self:OnClick(button)</OnClick>
+        </Scripts>
+      </Button>
+
+      <Frame name="$parentResultsListing" parentKey="ResultsListing" inherits="AuctionatorResultsListingTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentScrollList" relativePoint="TOPRIGHT" y="27"/>
+          <Anchor point="BOTTOMRIGHT" x="-20"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentShoppingResultsInset" parentKey="ShoppingResultsInset" inherits="AuctionatorInsetTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentResultsListing" relativePoint="TOPLEFT" x="-5" y="-25"/>
+          <Anchor point="BOTTOMRIGHT" relativeTo="$parentResultsListing" relativePoint="BOTTOMRIGHT"/>
+        </Anchors>
+      </Frame>
+
+      <Button name="$parentExportCSV" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_EXPORT_RESULTS" parentKey="ExportCSV">
+        <Anchors>
+          <Anchor point="TOP" relativeTo="$parentResultsListing" relativePoint="BOTTOM"/>
+          <Anchor point="RIGHT" relativePoint="RIGHT" x="-8" y="10"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>self:GetParent():ExportCSVClicked()</OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

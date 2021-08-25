@@ -1,0 +1,46 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorResultsRowTemplate" virtual="true" enableMouse="true">
+    <Size y="20"/>
+
+    <Anchors>
+      <Anchor point="LEFT"/>
+      <Anchor point="RIGHT"/>
+    </Anchors>
+
+    <Layers>
+      <Layer level="OVERLAY">
+        <Texture name="$parentSelectedHighlight" parentKey="SelectedHighlight" alphaMode="ADD" hidden="true">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="18"/>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+
+        <!-- Using a normal texture for highlight to control the behavior. -->
+        <Texture name="$parentHighlightTexture" parentKey="HighlightTexture" alphaMode="ADD" setAllPoints="true" hidden="true">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="18"/>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorResultsRowTemplateMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnClick>self:OnClick(button)</OnClick>
+      <OnEnter>self:OnEnter()</OnEnter>
+      <OnLeave>self:OnLeave()</OnLeave>
+    </Scripts>
+
+    <NormalTexture name="$parentNormalTexture" parentKey="NormalTexture" setAllPoints="true">
+      <Anchors>
+        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="18"/>
+        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+      </Anchors>
+    </NormalTexture>
+  </Frame>
+</Ui>

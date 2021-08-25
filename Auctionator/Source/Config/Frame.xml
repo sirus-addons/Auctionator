@@ -1,0 +1,10 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigurationFrame" parent="InterfaceOptionsFrame">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+  </Frame>
+</Ui>

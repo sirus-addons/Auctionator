@@ -1,0 +1,49 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <!-- Template for a radio button with label -->
+  <Frame name="AuctionatorConfigurationRadioButton" inherits="AuctionatorConfigurationTooltip" virtual="true">
+    <!--
+      <Attributes>
+        <Attribute name="value" value="" type="string"/>
+        <Attribute name="labelText" value="" type="string"/>
+        <Attribute name="tooltipTitleText" value="" type="string"/>
+        <Attribute name="tooltipText" value="" type="string"/>
+      </Attributes>
+    -->
+    <Size y="20"/>
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigRadioButtonMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnMouseUp>self:OnMouseUp(button)</OnMouseUp>
+      <OnEnter>self:OnEnter()</OnEnter>
+      <OnLeave>self:OnLeave()</OnLeave>
+    </Scripts>
+    <Anchors>
+      <Anchor point="LEFT"/>
+      <Anchor point="RIGHT"/>
+    </Anchors>
+    <Frames>
+      <CheckButton name="$parentRadioButton" inherits="UIRadioButtonTemplate" parentKey="RadioButton">
+        <Size x="18" y="18"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" x="20" y="-5"/>
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString name="$parentLabel" inherits="GameFontHighlight" parentKey="Label">
+              <Anchors>
+                <Anchor point="TOPLEFT" x="40" y="-8"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+          <OnClick>self:GetParent():OnClick(button)</OnClick>
+        </Scripts>
+      </CheckButton>
+    </Frames>
+  </Frame>
+</Ui>

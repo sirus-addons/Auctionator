@@ -1,0 +1,10 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorAuctionChatLogFrameTemplate" parent="UIParent" hidden="true" virtual="true">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorAuctionChatLogFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+  </Frame>
+</Ui>

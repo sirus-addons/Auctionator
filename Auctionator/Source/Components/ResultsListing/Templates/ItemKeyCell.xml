@@ -1,0 +1,43 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorItemKeyCellTemplate" parentKey="cell" enableMouse="true" virtual="true">
+    <!-- Copy and paste from AuctionHouseTableCellItemDisplayTemplate -->
+    <Size x="0" y="16"/>
+
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentIcon" parentKey="Icon">
+          <Size x="14" y="14"/>
+          <Anchors>
+            <Anchor point="LEFT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+
+      <Layer level="BORDER">
+        <Texture name="$parentIconBorder" parentKey="IconBorder">
+          <Size x="16" y="16"/>
+          <Anchors>
+            <Anchor point="CENTER" relativeTo="$parentIcon"/>
+          </Anchors>
+        </Texture>
+        <FontString name="$parentText" parentKey="Text" inherits="Number14FontWhite" justifyH="LEFT" maxLines="1">
+          <Size x="0" y="1"/>
+          <Anchors>
+            <Anchor point="LEFT" relativeTo="$parentIcon" relativePoint="RIGHT" x="4" y="-1"/>
+            <Anchor point="RIGHT" x="1"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorItemKeyCellTemplateMixin)
+
+        self.IconBorder:SetAtlas("auctionhouse-itemicon-small-border")
+      </OnLoad>
+      <OnEnter>self:OnEnter()</OnEnter>
+      <OnLeave>self:OnLeave()</OnLeave>
+      <OnMouseUp>self:OnMouseUp(button)</OnMouseUp>
+    </Scripts>
+  </Frame>
+</Ui>

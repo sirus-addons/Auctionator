@@ -1,0 +1,76 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorInsetTemplate" virtual="true">
+    <Attributes>
+      <Attribute name="layoutType" value="InsetFrameTemplate" type="string"/>
+    </Attributes>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture parentKey="Bg">
+          <Anchors>
+            <Anchor point="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Frame name="$parentNineSlice" parentKey="NineSlice" inherits="NineSlicePanelTemplate"/>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorInsetMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame name="AuctionatorInsetDarkTemplate" virtual="true">
+    <Attributes>
+      <Attribute name="layoutType" value="InsetFrameTemplate" type="string"/>
+    </Attributes>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture parentKey="Bg">
+          <Anchors>
+            <Anchor point="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Frame parentKey="NineSlice" inherits="NineSlicePanelTemplate"/>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorInsetDarkMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame name="AuctionatorInsetLeaveScrollSpaceMixin" useParentLevel="true" virtual="true">
+    <Attributes>
+      <Attribute name="layoutType" value="InsetFrameTemplate" type="string"/>
+    </Attributes>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture parentKey="Bg">
+          <Anchors>
+            <Anchor point="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT" x="-28"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Frame parentKey="NineSlice" inherits="NineSlicePanelTemplate"/>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorInsetMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+  </Frame>
+</Ui>

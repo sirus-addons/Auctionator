@@ -1,0 +1,110 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigurationMinMaxFrame" inherits="AuctionatorConfigurationTooltip" virtual="true">
+    <!--
+      <Attributes>
+        <Attribute name="titleText" value="" type="string"/>
+        <Attribute name="tooltipTitleText" value="" type="string"/>
+        <Attribute name="tooltipText" value="" type="string"/>
+      </Attributes>
+    -->
+    <Size y="50" x="150"/>
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigMinMaxMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+
+    <Anchors>
+      <Anchor point="LEFT"/>
+    </Anchors>
+
+    <Layers>
+      <Layer level="ARTWORK">
+        <FontString name="$parentTitle" inherits="GameFontHighlight" justifyH="CENTER" parentKey="Title">
+          <Size x="115" y="20"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="25"/>
+          </Anchors>
+        </FontString>
+        <FontString inherits="GameFontHighlight" justifyH="CENTER" text="-">
+          <Size x="15" y="20"/>
+          <Anchors>
+            <Anchor point="CENTER" relativeTo="$parentTitle" relativePoint="CENTER" y="-19" x="-3"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+
+    <Frames>
+      <EditBox name="$parentMinBox" autoFocus="false" inherits="InputBoxTemplate" parentKey="MinBox" letters="6">
+        <Size x="50" y="20"/>
+
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+
+        <FontString inherits="ChatFontNormal" justifyH="CENTER"/>
+
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString inherits="GameFontNormalSmall" text="AUCTIONATOR_L_MIN" justifyH="CENTER">
+              <Size x="50"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+
+        <Scripts>
+          <OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+          <OnEnterPressed>self:GetParent():OnEnterPressed()</OnEnterPressed>
+          <OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+          <OnTabPressed>self:GetParent():MinTabPressed()</OnTabPressed>
+          <OnTextChanged function="Auctionator_EditBox_OnTextChanged"/>
+          <OnKeyDown function="Auctionator_EditBox_OnKeyDown"/>
+        </Scripts>
+      </EditBox>
+
+      <EditBox name="$parentMaxBox" autoFocus="false" inherits="InputBoxTemplate" parentKey="MaxBox" letters="6">
+        <Size x="50" y="20"/>
+
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentMinBox" relativePoint="TOPRIGHT" x="15"/>
+        </Anchors>
+
+        <FontString inherits="ChatFontNormal" justifyH="CENTER"/>
+
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString inherits="GameFontNormalSmall" text="AUCTIONATOR_L_MAX" justifyH="CENTER">
+              <Size x="50"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+
+        <Scripts>
+          <OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+          <OnEnterPressed>self:GetParent():OnEnterPressed()</OnEnterPressed>
+          <OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+          <OnTabPressed>self:GetParent():MaxTabPressed()</OnTabPressed>
+          <OnTextChanged function="Auctionator_EditBox_OnTextChanged"/>
+          <OnKeyDown function="Auctionator_EditBox_OnKeyDown"/>
+        </Scripts>
+      </EditBox>
+
+      <Button name="$parentResetButton" parentKey="ResetButton" inherits="AuctionatorResetButton">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentMaxBox" relativePoint="TOPRIGHT" x="3" y="-3"/>
+        </Anchors>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

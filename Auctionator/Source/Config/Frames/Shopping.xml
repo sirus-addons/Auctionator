@@ -1,0 +1,52 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigShoppingFrame" parent="InterfaceOptionsFrame">
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigShoppingFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:Save()</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentTitleArea" inherits="AuctionatorConfigurationTitleFrame" parentKey="TitleArea">
+        <Attributes>
+          <Attribute name="titleText" value="AUCTIONATOR_L_CONFIG_SHOPPING_CATEGORY" type="string"/>
+          <Attribute name="subTitleText" value="AUCTIONATOR_L_CONFIG_SHOPPING_TEXT" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Frame name="$parentAutoListSearch" inherits="AuctionatorConfigurationCheckbox" parentKey="AutoListSearch">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_AUTO_LIST_SEARCH" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_AUTO_LIST_SEARCH_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_AUTO_LIST_SEARCH_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentDefaultListHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="DefaultListHeading">
+        <Attributes>
+          <Attribute name="headingText" value="AUCTIONATOR_L_DEFAULT_LIST_HEADER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAutoListSearch" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentDefaultShoppingList" inherits="AuctionatorDropDown" parentKey="DefaultShoppingList">
+        <Attributes>
+          <Attribute name="labelText" value="" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentDefaultListHeading" relativePoint="BOTTOMLEFT"/>
+          <Anchor point="RIGHT" relativePoint="LEFT" x="50"/>
+        </Anchors>
+      </Frame>
+   </Frames>
+  </Frame>
+</Ui>

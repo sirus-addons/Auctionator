@@ -1,0 +1,191 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorSellingBagFrame" virtual="true" parentKey="BagListing">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorSellingBagFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentItemIconDropDown" parentKey="ItemIconDropDown" inherits="AuctionatorItemIconDropDownTemplate" hidden="true"/>
+
+      <ScrollFrame name="$parentScrollFrame" parentKey="ScrollFrame" inherits="UIPanelScrollFrameTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+        </Anchors>
+
+        <Layers>
+          <Layer level="ARTWORK">
+            <Texture name="$parentTop" file="Interface\PaperDollInfoFrame\UI-Character-ScrollBar">
+              <Size x="31" y="102"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="-2" y="5"/>
+              </Anchors>
+              <TexCoords left="0" right="0.484375" top="0" bottom="0.4"/>
+            </Texture>
+            <Texture name="$parentBottom" file="Interface\PaperDollInfoFrame\UI-Character-ScrollBar">
+              <Size x="31" y="106"/>
+              <Anchors>
+                <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="-2" y="-2"/>
+              </Anchors>
+              <TexCoords left="0.515625" right="1.0" top="0" bottom="0.4140625"/>
+            </Texture>
+            <Texture name="$parentMiddle" file="Interface\PaperDollInfoFrame\UI-Character-ScrollBar">
+              <Size x="31" y="1"/>
+              <Anchors>
+                <Anchor point="TOP" relativeTo="$parentTop" relativePoint="BOTTOM"/>
+                <Anchor point="BOTTOM" relativeTo="$parentBottom" relativePoint="TOP"/>
+              </Anchors>
+              <TexCoords left="0" right="0.484375" top=".75" bottom="1.0"/>
+            </Texture>
+          </Layer>
+          <Layer level="BACKGROUND">
+            <Texture name="$parentBackground" parentKey="Background" file="Interface\FrameGeneral\UI-Background-Marble" horizTile="true" vertTile="true" setAllPoints="true">
+              <Anchors>
+                <Anchor point="TOPLEFT" relativePoint="TOPRIGHT"/>
+                <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="23"/>
+              </Anchors>
+            </Texture>
+          </Layer>
+        </Layers>
+
+        <ScrollChild>
+          <Frame name="$parentItemListingFrame" parentKey="ItemListingFrame">
+            <Frames>
+              <Frame name="$parentFavourites" parentKey="Favourites" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="title" value="AUCTIONATOR_L_FAVOURITES" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+                  <Anchor point="RIGHT" relativePoint="RIGHT"/>
+                </Anchors>
+              </Frame>
+              <Frame name="$parentWeaponItems" parentKey="WeaponItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_WEAPON" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentFavourites" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT" relativePoint="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentArmorItems" parentKey="ArmorItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_ARMOR" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentWeaponItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT" relativePoint="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentContainerItems" parentKey="ContainerItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_CONTAINER" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentArmorItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT" relativePoint="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentGemItems" parentKey="GemItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_GEM" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentContainerItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT" relativePoint="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentConsumableItems" parentKey="ConsumableItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_CONSUMABLE" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentGemItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentGlyphItems" parentKey="GlyphItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_GLYPH" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentConsumableItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentTradeGoodItems" parentKey="TradeGoodItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_TRADEGOODS" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentGlyphItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentRecipeItems" parentKey="RecipeItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_RECIPE" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentTradeGoodItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentQuestItems" parentKey="QuestItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_QUESTITEM" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentRecipeItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentAmmoItems" parentKey="AmmoItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_AMMO" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentQuestItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT" relativePoint="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentQuiverItems" parentKey="QuiverItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_QUIVER" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentAmmoItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT" relativePoint="RIGHT"/>
+                </Anchors>
+              </Frame>
+
+              <Frame name="$parentMiscItems" parentKey="MiscItems" inherits="AuctionatorBagClassListing">
+                <Attributes>
+                  <Attribute name="classId" value="LE_ITEM_CLASS_MISCELLANEOUS" type="string"/>
+                </Attributes>
+                <Anchors>
+                  <Anchor point="TOPLEFT" relativeTo="$parentQuiverItems" relativePoint="BOTTOMLEFT"/>
+                  <Anchor point="RIGHT"/>
+                </Anchors>
+              </Frame>
+            </Frames>
+          </Frame>
+        </ScrollChild>
+      </ScrollFrame>
+    </Frames>
+  </Frame>
+</Ui>

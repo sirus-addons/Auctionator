@@ -1,0 +1,10 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigurationHorizontalRadioButtonGroup" virtual="true" inherits="AuctionatorConfigurationRadioButtonGroup">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigHorizontalRadioButtonGroupMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+  </Frame>
+</Ui>

@@ -1,0 +1,272 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigQuantitiesFrame" parent="InterfaceOptionsFrame">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigQuantitiesFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:Save()</OnHide>
+    </Scripts>
+    <Frames>
+      <Frame name="$parentTitleArea" inherits="AuctionatorConfigurationTitleFrame" parentKey="TitleArea">
+        <Attributes>
+          <Attribute name="titleText" value="AUCTIONATOR_L_CONFIG_QUANTITIES_CATEGORY" type="string"/>
+          <Attribute name="subTitleText" value="AUCTIONATOR_L_CONFIG_QUANTITIES_TEXT" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Frame name="$parentWeaponHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="WeaponHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTION_CATEGORY_WEAPONS" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentWeaponQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="WeaponQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_WEAPON" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentWeaponHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentArmorHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="ArmorHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="ARMOR" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentWeaponQuantity" relativePoint="BOTTOMLEFT" y="5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentArmorQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="ArmorQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_ARMOR" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentArmorHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentContainerHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="ContainerHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTION_CATEGORY_CONTAINERS" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentArmorQuantity" relativePoint="BOTTOMLEFT" y="5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentContainerQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="ContainerQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_CONTAINER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentContainerHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentConsumableHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="ConsumableHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTION_CATEGORY_CONSUMABLES" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentContainerQuantity" relativePoint="BOTTOMLEFT" y="5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentConsumableQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="ConsumableQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_CONSUMABLE" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentConsumableHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentGlyphHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="GlyphHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="GLYPHS" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentConsumableQuantity" relativePoint="BOTTOMLEFT" y="5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentGlyphQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="GlyphQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_GLYPH" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentGlyphHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentTradeGoodsHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="TradeGoodsHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTION_CATEGORY_TRADE_GOODS" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentGlyphQuantity" relativePoint="BOTTOMLEFT" y="5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentTradeGoodsQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="TradeGoodsQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_TRADEGOODS" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTradeGoodsHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentAmmoHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="AmmoHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTION_CATEGORY_AMMO" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT" x="198"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentAmmoQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="AmmoQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_AMMO" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAmmoHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentQuiverHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="QuiverHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTION_CATEGORY_QUIVER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAmmoQuantity" relativePoint="BOTTOMLEFT" y="5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentQuiverQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="QuiverQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_QUIVER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentQuiverHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentRecipesHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="RecipesHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTION_CATEGORY_RECIPES" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentQuiverQuantity" relativePoint="BOTTOMLEFT" y="5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentRecipesQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="RecipesQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_RECIPE" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentRecipesHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentGemHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="GemHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTION_CATEGORY_GEMS" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentRecipesQuantity" relativePoint="BOTTOMLEFT" y="5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentGemQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="GemQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_GEM" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentGemHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentQuestHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="QuestHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTION_CATEGORY_QUEST_ITEMS" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentGemQuantity" relativePoint="BOTTOMLEFT" y="5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentQuestQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="QuestQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_QUESTITEM" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentQuestHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentMiscHeading" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="MiscHeading">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTION_CATEGORY_MISCELLANEOUS" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentQuestQuantity" relativePoint="BOTTOMLEFT" y="5"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentMiscQuantity" inherits="AuctionatorConfigurationNumericInput" parentKey="MiscQuantity">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_DEFAULT_QUANTITY_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="classID" value="LE_ITEM_CLASS_MISCELLANEOUS" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentMiscHeading" relativePoint="BOTTOMLEFT" y="-5"/>
+        </Anchors>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

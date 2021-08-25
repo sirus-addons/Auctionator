@@ -1,0 +1,66 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorImportListTemplate" inherits="AuctionatorSimplePanelTemplate" frameStrata="DIALOG" enableMouse="true" virtual="true" hidden="true">
+    <Size x="350" y="320"/>
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorListImportFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:OnHide()</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentInset" parentKey="Inset" inherits="AuctionatorInsetDarkTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="4" y="-30"/>
+          <Anchor point="BOTTOMRIGHT" x="-6" y="32"/>
+        </Anchors>
+      </Frame>
+      <ScrollFrame name="$parentScrollFrame" parentKey="ScrollFrame" inherits="UIPanelScrollFrameTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentInset" relativePoint="TOPLEFT" x="5" y="-6"/>
+          <Anchor point="BOTTOMRIGHT" relativeTo="$parentInset" relativePoint="BOTTOMRIGHT" x="-27" y="4"/>
+        </Anchors>
+        <ScrollChild>
+          <EditBox autoFocus="false" multiLine="true" parentKey="ImportString">
+            <FontString inherits="ChatFontNormal" justifyH="LEFT"/>
+            <Scripts>
+              <OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+            </Scripts>
+          </EditBox>
+        </ScrollChild>
+      </ScrollFrame>
+
+      <!-- Action Buttons -->
+      <Button name="$parentCloseDialog" parentKey="CloseDialog" inherits="UIPanelCloseButtonNoScripts">
+        <Anchors>
+          <Anchor point="TOPRIGHT"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>self:GetParent():OnCloseDialogClicked()</OnClick>
+        </Scripts>
+      </Button>
+
+      <Button name="$parentImport" parentKey="Import" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_IMPORT">
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativeTo="$parentInset" relativePoint="BOTTOMRIGHT" y="-3"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>self:GetParent():OnImportClicked()</OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+
+    <Layers>
+      <Layer>
+        <FontString text="AUCTIONATOR_L_LIST_IMPORT_HEADER" inherits="GameFontHighlight">
+          <Anchors>
+            <Anchor point="TOP" y="-10"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

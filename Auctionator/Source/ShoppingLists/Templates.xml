@@ -1,0 +1,93 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Button name="AuctionatorScrollListLineButtonTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorScrollListLineButtonMixin)
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnEnter>self:OnEnter()</OnEnter>
+      <OnLeave>self:OnLeave()</OnLeave>
+    </Scripts>
+  </Button>
+  <Button name="AuctionatorScrollListLineTemplate" inherits="ScrollListLineTextTemplate" virtual="true">
+    <Size x="0" y="20"/>
+
+    <Anchors>
+      <Anchor point="LEFT"/>
+      <Anchor point="RIGHT"/>
+    </Anchors>
+
+    <Layers>
+      <Layer level="BACKGROUND">
+        <FontString name="$parentText" parentKey="Text" inherits="NumberFontNormal" justifyH="LEFT" maxLines="1">
+          <Anchors>
+            <Anchor point="LEFT" x="4" y="0"/>
+            <Anchor point="RIGHT" x="-45" y="0"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+
+      <Layer level="OVERLAY"><!-- Using a normal texture for highlight to control the behavior. -->
+        <Texture name="$parentSelectedHighlight" parentKey="SelectedHighlight" alphaMode="ADD" hidden="true"/>
+        <Texture name="$parentHighlightTexture" parentKey="HighlightTexture" alphaMode="ADD" setAllPoints="true" hidden="true"/>
+      </Layer>
+    </Layers>
+
+    <NormalTexture name="$parentNormalTexture" parentKey="NormalTexture" setAllPoints="true"/>
+
+    <Frames>
+      <Button name="$parentEditButton" parentKey="EditButton" inherits="AuctionatorScrollListLineButtonTemplate">
+        <Size>
+          <AbsDimension x="15" y="15"/>
+        </Size>
+        <Anchors>
+          <Anchor point="TOPRIGHT" x="-30" y="0"/>
+        </Anchors>
+        <Attributes>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_EDIT_ITEM" type="string"/>
+        </Attributes>
+        <Layers>
+          <Layer level="ARTWORK">
+            <Texture file="Interface\AddOns\Auctionator\Images\Pen_Icon" parentKey="texture"/>
+            <Texture file="Interface\AddOns\Auctionator\Images\Pen_Icon_Grey" parentKey="hoverTexture"/>
+          </Layer>
+        </Layers>
+
+        <Scripts>
+          <OnClick>self:GetParent():EditItem()</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parentDeleteButton" parentKey="DeleteButton" inherits="AuctionatorScrollListLineButtonTemplate">
+        <Size>
+          <AbsDimension x="15" y="15"/>
+        </Size>
+        <Attributes>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_DELETE" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPRIGHT" x="-10" y="0"/>
+        </Anchors>
+        <Layers>
+          <Layer level="ARTWORK">
+            <Texture file="Interface\AddOns\Auctionator\Images\Trash_Icon" parentKey="texture"/>
+            <Texture file="Interface\AddOns\Auctionator\Images\Trash_Icon_Grey" parentKey="hoverTexture"/>
+          </Layer>
+        </Layers>
+
+        <Scripts>
+          <OnClick>self:GetParent():DeleteItem()</OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorScrollListLineMixin)
+
+        self.SelectedHighlight:SetAtlas("auctionhouse-ui-row-select")
+        self.HighlightTexture:SetAtlas("auctionhouse-ui-row-highlight")
+        self.NormalTexture:SetAtlas("auctionhouse-rowstripe-1")
+      </OnLoad>
+    </Scripts>
+  </Button>
+</Ui>

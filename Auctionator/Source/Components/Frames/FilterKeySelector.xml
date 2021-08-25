@@ -1,0 +1,20 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorFilterKeySelectorTemplate" inherits="UIDropDownMenuTemplate" virtual="true">
+    <Size x="150" y="32"/>
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorFilterKeySelectorMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+
+    <Frames>
+      <Button name="$parentResetButton" parentKey="ResetButton" inherits="AuctionatorResetButton">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="-11" y="-6"/>
+        </Anchors>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

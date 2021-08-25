@@ -1,0 +1,104 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigBasicOptionsFrame" parent="InterfaceOptionsFrame">
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigBasicOptionsFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:Save()</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentTitleArea" inherits="AuctionatorConfigurationTitleFrame" parentKey="TitleArea">
+        <Attributes>
+          <Attribute name="titleText" value="AUCTIONATOR_L_CONFIG_BASIC_OPTIONS_CATEGORY" type="string"/>
+          <Attribute name="subTitleText" value="AUCTIONATOR_L_CONFIG_BASIC_OPTIONS_TEXT" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Frame name="$parentAutoscan" inherits="AuctionatorConfigurationCheckbox" parentKey="Autoscan">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_AUTOSCAN" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_AUTOSCAN_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_AUTOSCAN_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentAutoscanIntervalHeader" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="AutoscanIntervalHeader">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTIONATOR_L_CONFIG_AUTOSCAN_INTERVAL_HEADER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAutoscan" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentAutoscanInterval" inherits="AuctionatorConfigurationNumericInput" parentKey="AutoscanInterval">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_AUTOSCAN_INTERVAL" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_AUTOSCAN_INTERVAL_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_AUTOSCAN_INTERVAL_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAutoscanIntervalHeader" relativePoint="BOTTOMLEFT" y="-15"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentDefaultTabHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="DefaultTabHeading">
+        <Attributes>
+          <Attribute name="headingText" value="AUCTIONATOR_L_DEFAULT_TAB" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAutoscanInterval" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentDefaultTab" inherits="AuctionatorDropDown" parentKey="DefaultTab">
+       <Attributes>
+         <Attribute name="labelText" value="AUCTIONATOR_L_DEFAULT_TAB_TEXT" type="string"/>
+         <Attribute name="textString" value="NONE;SHOPPING_TAB;SELLING_TAB;CANCELLING_TAB;AUCTIONATOR" type="string"/>
+         <Attribute name="valuesString" value="0;1;2;3;4" type="string"/>
+       </Attributes>
+       <Anchors>
+         <Anchor point="TOPLEFT" relativeTo="$parentDefaultTabHeading" relativePoint="BOTTOMLEFT"/>
+       </Anchors>
+      </Frame>
+
+      <Frame name="$parentSmallTabs" inherits="AuctionatorConfigurationCheckbox" parentKey="SmallTabs">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SMALL_TABS" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SMALL_TABS_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SMALL_TABS_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentDefaultTab" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentReagentSearchHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="ReagentSearchHeading">
+        <Attributes>
+          <Attribute name="headingText" value="AUCTIONATOR_L_REAGENT_SEARCH" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentSmallTabs" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentCraftingCostShowProfit" inherits="AuctionatorConfigurationCheckbox" parentKey="CraftingCostShowProfit">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_CRAFTING_COST_SHOW_PROFIT" type="string" />
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_CRAFTING_COST_SHOW_PROFIT_TOOLTIP_HEADER" type="string" />
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_CRAFTING_COST_SHOW_PROFIT_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentReagentSearchHeading" relativePoint="BOTTOMLEFT" />
+        </Anchors>
+      </Frame>
+   </Frames>
+  </Frame>
+</Ui>

@@ -1,0 +1,98 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigLIFOFrame" parent="InterfaceOptionsFrame">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigLIFOFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:Save()</OnHide>
+    </Scripts>
+    <Frames>
+      <Frame name="$parentTitleArea" inherits="AuctionatorConfigurationTitleFrame" parentKey="TitleArea">
+        <Attributes>
+        <Attribute name="titleText" value="AUCTIONATOR_L_CONFIG_SELLING_LIFO_HEADER" type="string"/>
+          <Attribute name="subTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_LIFO_TEXT" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Frame name="$parentCommodityDurationGroup" inherits="AuctionatorConfigurationRadioButtonGroup" parentKey="CommodityDurationGroup">
+        <Attributes>
+          <Attribute name="groupHeadingText" value="AUCTIONATOR_L_DEFAULT_AUCTION_DURATION" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT" y="-30"/>
+        </Anchors>
+        <Frames>
+          <Frame name="$parentDuration12" inherits="AuctionatorConfigurationRadioButton">
+            <Attributes>
+              <Attribute name="labelText" value="AUCTIONATOR_L_AUCTION_DURATION_12" type="string"/>
+              <Attribute name="value" value="12" type="number"/>
+            </Attributes>
+          </Frame>
+          <Frame name="$parentDuration24" inherits="AuctionatorConfigurationRadioButton">
+            <Attributes>
+              <Attribute name="labelText" value="AUCTIONATOR_L_AUCTION_DURATION_24" type="string"/>
+              <Attribute name="value" value="24" type="number"/>
+            </Attributes>
+          </Frame>
+          <Frame name="$parentDuration48" inherits="AuctionatorConfigurationRadioButton">
+            <Attributes>
+              <Attribute name="labelText" value="AUCTIONATOR_L_AUCTION_DURATION_48" type="string"/>
+              <Attribute name="value" value="48" type="number"/>
+            </Attributes>
+          </Frame>
+        </Frames>
+      </Frame>
+
+      <Frame name="$parentCommoditySalesPreference" inherits="AuctionatorConfigurationRadioButtonGroup" parentKey="CommoditySalesPreference">
+        <Attributes>
+          <Attribute name="groupHeadingText" value="AUCTIONATOR_L_SALES_PREFERENCE" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentCommodityDurationGroup" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+        <Frames>
+          <Frame name="$parentPercentage" inherits="AuctionatorConfigurationRadioButton">
+            <!--
+              The values here should be populated by Auctionator.Config.SalesTypes but I don't know
+              how to do that programmatically?
+            -->
+            <Attributes>
+              <Attribute name="labelText" value="AUCTIONATOR_L_PERCENTAGE" type="string"/>
+              <Attribute name="value" value="percentage" type="string"/>
+            </Attributes>
+          </Frame>
+          <Frame name="$parentSetValue" inherits="AuctionatorConfigurationRadioButton">
+            <Attributes>
+              <Attribute name="labelText" value="AUCTIONATOR_L_SET_VALUE" type="string"/>
+              <Attribute name="value" value="static" type="string"/>
+            </Attributes>
+          </Frame>
+        </Frames>
+      </Frame>
+
+      <Frame name="$parentCommodityUndercutPercentage" inherits="AuctionatorConfigurationNumericInput" parentKey="CommodityUndercutPercentage" hidden="true">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_PERCENTAGE_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_PERCENTAGE_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_PERCENTAGE_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentCommoditySalesPreference" relativePoint="BOTTOMLEFT" y="-7"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentCommodityUndercutValue" inherits="AuctionatorConfigurationMoneyInput" parentKey="CommodityUndercutValue" hidden="true">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_SET_VALUE_SUFFIX" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_UNDERCUT_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_UNDERCUT_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentCommoditySalesPreference" relativePoint="BOTTOMLEFT" y="-7"/>
+        </Anchors>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

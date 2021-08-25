@@ -1,0 +1,122 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigSellingFrame" parent="InterfaceOptionsFrame">
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigSellingFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:Save()</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentTitleArea" inherits="AuctionatorConfigurationTitleFrame" parentKey="TitleArea">
+        <Attributes>
+          <Attribute name="titleText" value="AUCTIONATOR_L_CONFIG_SELLING_CATEGORY" type="string"/>
+          <Attribute name="subTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_TEXT" type="string"/>
+        </Attributes>
+      </Frame>
+      <Frame name="$parentAuctionChatLog" inherits="AuctionatorConfigurationCheckbox" parentKey="AuctionChatLog">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_CHAT_LOG" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_CHAT_LOG_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_CHAT_LOG_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+      <Frame name="$parentPriceHistory" inherits="AuctionatorConfigurationCheckbox" parentKey="PriceHistory">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_PRICE_HISTORY" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_PRICE_HISTORY_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_PRICE_HISTORY_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAuctionChatLog" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+      <Frame name="$parentShowBidPrice" inherits="AuctionatorConfigurationCheckbox" parentKey="ShowBidPrice">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_SHOW_BID_PRICE" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_SHOW_BID_PRICE_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_SHOW_BID_PRICE_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentPriceHistory" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+      <Frame name="$parentBagHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="BagHeading">
+        <Attributes>
+          <Attribute name="headingText" value="AUCTIONATOR_L_CONFIG_BAG" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentShowBidPrice" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentBagShown" inherits="AuctionatorConfigurationCheckbox" parentKey="BagShown">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_BAG_SHOW_SELLING_BAG" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_BAG_SHOW_SELLING_BAG_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_BAG_SHOW_SELLING_BAG_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentBagHeading" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+      <Frame name="$parentBagCollapsed" inherits="AuctionatorConfigurationCheckbox" parentKey="BagCollapsed">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_BAG_COLLAPSED" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_BAG_COLLAPSED_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_BAG_COLLAPSED_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentBagShown" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+      <Frame name="$parentIconSize" inherits="AuctionatorConfigurationNumericInput" parentKey="IconSize">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_ICON_SIZE" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_ICON_SIZE_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_ICON_SIZE_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentBagCollapsed" relativePoint="BOTTOMLEFT" y="-15"/>
+        </Anchors>
+      </Frame>
+      <Frame name="$parentAutoSelectNext" inherits="AuctionatorConfigurationCheckbox" parentKey="AutoSelectNext">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_AUTO_SELECT_NEXT" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_AUTO_SELECT_NEXT_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_AUTO_SELECT_NEXT_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentIconSize" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+      <Frame name="$parentMissingFavourites" inherits="AuctionatorConfigurationCheckbox" parentKey="MissingFavourites">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_MISSING_FAVOURITES" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_MISSING_FAVOURITES_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_MISSING_FAVOURITES_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAutoSelectNext" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Button name="$parentUnhideAll" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_UNHIDE_ALL_HIDDEN_ITEMS" parentKey="UnhideAll">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentMissingFavourites" relativePoint="BOTTOMLEFT" x="23"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():UnhideAllClicked()
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

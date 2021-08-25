@@ -1,0 +1,47 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <!-- Template for a single option "box" containing a checkbox -->
+  <Frame name="AuctionatorConfigurationCheckbox" inherits="AuctionatorConfigurationTooltip" virtual="true">
+    <!--
+      <Attributes>
+        <Attribute name="labelText" value="" type="string"/>
+        <Attribute name="tooltipTitleText" value="" type="string"/>
+        <Attribute name="tooltipText" value="" type="string"/>
+      </Attributes>
+    -->
+    <Size y="36"/>
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigCheckboxMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnMouseUp>self:OnMouseUp(button)</OnMouseUp>
+      <OnEnter>self:OnEnter()</OnEnter>
+      <OnLeave>self:OnLeave()</OnLeave>
+    </Scripts>
+    <Anchors>
+      <Anchor point="LEFT"/>
+      <Anchor point="RIGHT"/>
+    </Anchors>
+    <Frames>
+      <CheckButton name="$parentCheckBox" inherits="UICheckButtonTemplate" parentKey="CheckBox">
+        <Anchors>
+          <Anchor point="LEFT" x="16"/>
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString name="$parentLabel" inherits="GameFontHighlight" justifyH="LEFT" parentKey="Label">
+              <Size x="354" y="0"/>
+              <Anchors>
+                <Anchor point="LEFT" x="34" y="0"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+        </Scripts>
+      </CheckButton>
+    </Frames>
+  </Frame>
+</Ui>

@@ -1,0 +1,33 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigProfileFrame" parent="InterfaceOptionsFrame">
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigProfileFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:Save()</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentTitleArea" inherits="AuctionatorConfigurationTitleFrame" parentKey="TitleArea">
+        <Attributes>
+          <Attribute name="titleText" value="AUCTIONATOR_L_CONFIG_PROFILE_CATEGORY" type="string"/>
+          <Attribute name="subTitleText" value="AUCTIONATOR_L_CONFIG_PROFILE_TEXT" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Frame name="$parentProfileToggle" inherits="AuctionatorConfigurationCheckbox" parentKey="ProfileToggle">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_PROFILE_TOGGLE" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_PROFILE_TOGGLE_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_PROFILE_TOGGLE_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

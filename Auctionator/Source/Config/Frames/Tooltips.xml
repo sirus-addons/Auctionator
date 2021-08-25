@@ -1,0 +1,88 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigTooltipsFrame" parent="InterfaceOptionsFrame">
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigTooltipsFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:Save()</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentTitleArea" inherits="AuctionatorConfigurationTitleFrame" parentKey="TitleArea">
+        <Attributes>
+          <Attribute name="titleText" value="AUCTIONATOR_L_CONFIG_TOOLTIPS_CATEGORY" type="string"/>
+          <Attribute name="subTitleText" value="AUCTIONATOR_L_CONFIG_TOOLTIPS_TEXT" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Frame name="$parentMailboxTooltips" inherits="AuctionatorConfigurationCheckbox" parentKey="MailboxTooltips">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_MAIL_TOOLTIP" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_MAIL_TOOLTIP_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_MAIL_TOOLTIP_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentVendorTooltips" inherits="AuctionatorConfigurationCheckbox" parentKey="VendorTooltips">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_VENDOR_TOOLTIP" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_VENDOR_TOOLTIP_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_VENDOR_TOOLTIP_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentMailboxTooltips" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentAuctionTooltips" inherits="AuctionatorConfigurationCheckbox" parentKey="AuctionTooltips">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_AUCTION_TOOLTIP" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_AUCTION_TOOLTIP_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_AUCTION_TOOLTIP_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentVendorTooltips" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentEnchantTooltips" inherits="AuctionatorConfigurationCheckbox" parentKey="EnchantTooltips">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_ENCHANT_TOOLTIP" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_ENCHANT_TOOLTIP_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_ENCHANT_TOOLTIP_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAuctionTooltips" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentDetailsEnchantTooltips" inherits="AuctionatorDropDown" parentKey="DetailsEnchantTooltips">
+       <Attributes>
+         <Attribute name="labelText" value="AUCTIONATOR_L_DETAILS_ENCHANT_TOOLTIPS" type="string"/>
+         <Attribute name="textString" value="SHIFT;CONTROL;ALT;NEVER;ALWAYS" type="string"/>
+         <Attribute name="valuesString" value="0;1;2;3;4" type="string"/>
+       </Attributes>
+       <Anchors>
+         <Anchor point="TOPLEFT" relativeTo="$parentEnchantTooltips" relativePoint="BOTTOMLEFT"/>
+       </Anchors>
+      </Frame>
+
+      <Frame name="$parentShiftStackTooltips" inherits="AuctionatorConfigurationCheckbox" parentKey="ShiftStackTooltips">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_STACK_TOOLTIP" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_STACK_TOOLTIP_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_STACK_TOOLTIP_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentDetailsEnchantTooltips" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

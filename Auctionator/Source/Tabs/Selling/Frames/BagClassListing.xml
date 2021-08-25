@@ -1,0 +1,31 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorBagClassListing" virtual="true" hidden="true">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorBagClassListingMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+
+    <Frames>
+      <Button name="$parentSectionTitle" parentKey="SectionTitle" inherits="AuctionCategoryButtonTemplate">
+        <Size y="20"/>
+
+        <Anchors>
+          <Anchor point="TOPLEFT" x="1"/>
+          <Anchor point="RIGHT"/>
+        </Anchors>
+
+        <Scripts>>
+          <OnClick>self:GetParent():OnClick()</OnClick>
+        </Scripts>
+      </Button>
+
+      <Frame name="$parentItemContainer" parentKey="ItemContainer">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentSectionTitle" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

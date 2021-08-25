@@ -1,0 +1,65 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Button name="AuctionatorBagItem" virtual="true">
+    <Size x="42" y="42"/>
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorBagItemMixin)
+        self:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+      </OnLoad>
+      <OnEnter>self:OnEnter()</OnEnter>
+      <OnLeave>self:OnLeave()</OnLeave>
+      <OnClick>self:OnClick(button)</OnClick>
+    </Scripts>
+
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentEmptySlot" parentKey="EmptySlot" file="Interface\BUTTONS\UI-Slot-Background">
+          <Anchors>
+            <Anchor point="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT"/>
+          </Anchors>
+          <TexCoords left="0" right="0.640625" top="0" bottom="0.640625"/>
+        </Texture>
+      </Layer>
+      <Layer level="BORDER">
+        <Texture name="$parentIcon" parentKey="Icon">
+          <Anchors>
+            <Anchor point="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+      <Layer level="ARTWORK">
+        <Texture name="$parentIconBorder" parentKey="IconBorder" file="Interface\Common\WhiteIconFrame">
+          <Anchors>
+            <Anchor point="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+      <Layer level="OVERLAY">
+        <FontString name="$parentText" parentKey="Text" inherits="NumberFont_Outline_Med" justifyH="RIGHT" maxLines="1">
+         <Color a="1" r="1" g="1" b="1"/>
+          <Size x="0" y="18"/>
+          <Anchors>
+            <Anchor point="BOTTOMRIGHT" x="-3" y="3"/>
+            <Anchor point="LEFT"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <PushedTexture name="$parentPushed" file="Interface\Buttons\UI-Quickslot-Depress">
+      <Anchors>
+        <Anchor point="TOPLEFT" relativeTo="$parentIcon" relativePoint="TOPLEFT"/>
+        <Anchor point="BOTTOMRIGHT" relativeTo="$parentIcon" relativePoint="BOTTOMRIGHT"/>
+      </Anchors>
+    </PushedTexture>
+    <HighlightTexture name="$parentHighlight" parentKey="Highlight" file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD">
+      <Anchors>
+        <Anchor point="TOPLEFT" relativeTo="$parentIcon" relativePoint="TOPLEFT"/>
+        <Anchor point="BOTTOMRIGHT" relativeTo="$parentIcon" relativePoint="BOTTOMRIGHT"/>
+      </Anchors>
+    </HighlightTexture>
+  </Button>
+</Ui>

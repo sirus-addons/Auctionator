@@ -1,0 +1,10 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorPostingHistoryRowTemplate" inherits="AuctionatorHistoricalPriceRowTemplate" virtual="true" enableMouse="true">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorPostingHistoryRowMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+  </Frame>
+</Ui>

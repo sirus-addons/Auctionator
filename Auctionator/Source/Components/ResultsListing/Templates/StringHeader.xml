@@ -1,0 +1,27 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorStringColumnHeaderTemplate" inherits="ColumnDisplayButtonShortTemplate" parentKey="header" enableMouse="true" virtual="true">
+    <Size y="19"/>
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorStringColumnHeaderTemplateMixin)
+
+        self.Arrow:SetAtlas("auctionhouse-ui-sortarrow", true)
+      </OnLoad>
+      <OnClick>self:OnClick(button)</OnClick>
+      <OnMouseUp>self:OnMouseUp(button)</OnMouseUp>
+      <OnEnter>self:OnEnter()</OnEnter>
+      <OnLeave>self:OnLeave()</OnLeave>
+    </Scripts>
+
+    <Layers>
+      <Layer level="OVERLAY">
+        <Texture name="$parentArrow" parentKey="Arrow" hidden="true">
+          <Anchors>
+            <Anchor point="LEFT" relativeTo="$parentText" relativePoint="RIGHT" x="3" y="0"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

@@ -1,0 +1,36 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigurationTitleFrame" virtual="true">
+    <!--
+      <Attributes>
+        <Attribute name="titleText" value="" type="string"/>
+        <Attribute name="subTitleText" value="" type="string"/>
+      </Attributes>
+    -->
+    <Size y="60"/>
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigurationTitleFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+    <Anchors>
+      <Anchor point="TOPLEFT"/>
+      <Anchor point="RIGHT"/>
+    </Anchors>
+    <Layers>
+      <Layer level="ARTWORK">
+        <FontString name="$parentTitle" inherits="GameFontNormalLarge" parentKey="Title">
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-15"/>
+          </Anchors>
+        </FontString>
+        <FontString name="$parentSubTitle" inherits="GameFontHighlightSmall" justifyH="LEFT" justifyV="TOP" parentKey="SubTitle">
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-40"/>
+            <Anchor point="TOPRIGHT" x="-20" y="-40"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

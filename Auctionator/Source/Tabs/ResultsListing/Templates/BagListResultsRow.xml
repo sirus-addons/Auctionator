@@ -1,0 +1,10 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorBagListResultsRowTemplate" inherits="AuctionatorResultsRowTemplate" virtual="true" enableMouse="true">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorBagListResultsRowMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+  </Frame>
+</Ui>

@@ -1,0 +1,29 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigurationSubHeadingFrame" virtual="true">
+    <!--
+      <Attributes>
+        <Attribute name="subHeadingText" value="" type="string"/>
+      </Attributes>
+    -->
+    <Size y="20"/>
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigurationSubHeadingMixin)
+        self:InitializeSubHeading()
+      </OnLoad>
+    </Scripts>
+    <Anchors>
+      <Anchor point="TOPLEFT"/>
+      <Anchor point="RIGHT"/>
+    </Anchors>
+    <Layers>
+      <Layer level="ARTWORK">
+        <FontString inherits="GameFontHighlight" justifyH="LEFT" parentKey="HeadingText">
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-6"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

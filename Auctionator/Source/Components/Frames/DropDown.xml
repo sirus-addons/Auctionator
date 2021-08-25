@@ -1,0 +1,43 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorDropDown" virtual="true">
+    <!--
+      <Attributes>
+        <Attribute name="labelText" value="" type="string"/>
+        <Attribute name="textString" value="CONSTANT_1;CONSTANT_2;..." type="string">
+        <Attribute name="valuesString" value="string_1;string_2;..." type="string">
+      </Attributes>
+    -->
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorDropDownMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+    <Size y="40"/>
+
+    <Frames>
+      <Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" parentKey="DropDown">
+        <Anchors>
+          <Anchor point="LEFT" x="2"/>
+        </Anchors>
+
+        <Scripts>
+          <OnLoad>
+            Mixin(self, AuctionatorDropDownInternalMixin)
+          </OnLoad>
+        </Scripts>
+      </Frame>
+    </Frames>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <FontString name="$parentLebel" inherits="GameFontHighlight" justifyH="LEFT" parentKey="Label">
+          <Size x="218" y="0"/>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Anchors>
+      <Anchor point="LEFT"/>
+      <Anchor point="RIGHT"/>
+    </Anchors>
+  </Frame>
+</Ui>

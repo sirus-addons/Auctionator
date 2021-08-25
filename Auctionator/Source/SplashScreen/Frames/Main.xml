@@ -1,0 +1,82 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorSplashScreenTemplate" virtual="true" inherits="SimplePanelTemplate_NineSlice" frameStrata="DIALOG" hidden="true">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorSplashScreenMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+    </Scripts>
+
+    <Size x="600" y="600"/>
+
+    <Anchors>
+      <Anchor point="CENTER"/>
+    </Anchors>
+
+    <Attributes>
+      <Attribute name="layoutType" value="SimplePanelTemplate" type="string"/>
+    </Attributes>
+
+    <Frames>
+      <Frame name="$parentInset" parentKey="Inset" inherits="InsetFrameTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="4" y="-26"/>
+          <Anchor point="BOTTOMRIGHT" x="-6" y="26"/>
+        </Anchors>
+      </Frame>
+
+      <!-- Frame Close Button -->
+      <Button name="$parentClose" parentKey="Close" inherits="UIPanelCloseButtonNoScripts">
+        <Anchors>
+          <Anchor point="TOPRIGHT" x="2" y="1"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            StaticPopupSpecial_Hide(self:GetParent())
+          </OnClick>
+        </Scripts>
+      </Button>
+
+      <ScrollFrame name="$parentScrollFrame" parentKey="ScrollFrame" inherits="UIPanelScrollFrameTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentInset" relativePoint="TOPLEFT" x="10" y="-7"/>
+          <Anchor point="BOTTOMRIGHT" relativeTo="$parentInset" relativePoint="BOTTOMRIGHT" x="-23" y="3"/>
+        </Anchors>
+
+        <ScrollChild>
+          <Frame name="$parentContent" parentKey="Content"/>
+        </ScrollChild>
+      </ScrollFrame>
+
+      <Frame name="$parentHideCheckbox" inherits="AuctionatorConfigurationCheckbox" parentKey="HideCheckbox">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_SPLASH_HIDE_MESSAGE" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentInset" relativePoint="BOTTOMLEFT" x="-20" y="2"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentNineSlice" parentKey="NineSlice" inherits="NineSlicePanelTemplate"/>
+    </Frames>
+
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentBg" file="Interface\FrameGeneral\UI-Background-Rock" horizTile="true" vertTile="true" parentKey="Bg">
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="-6"/>
+            <Anchor point="BOTTOMRIGHT" x="-2" y="3"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+      <Layer level="OVERLAY">
+        <FontString text="AUCTIONATOR_L_SPLASH_SCREEN_HEADER" inherits="GameFontHighlight">
+          <Anchors>
+            <Anchor point="TOP" y="-10"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

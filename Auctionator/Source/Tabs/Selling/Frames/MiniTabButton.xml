@@ -1,0 +1,81 @@
+<Ui>
+  <Button name="AuctionatorSellingMiniTabButtonTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorSellingMiniTabButtonMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnClick>self:OnClick(button)</OnClick>
+      <OnShow>self:OnShow()</OnShow>
+    </Scripts>
+    <Size x="115" y="32"/>
+    <Layers>
+      <Layer level="BACKGROUND" sublevel="2">
+        <Texture name="$parentLeftDisabled" parentKey="LeftDisabled" file="Interface\HelpFrame\HelpFrameTab-Active">
+          <Size x="16" y="32"/>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="0" y="-3"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <TexCoords left="0" right="0.25" top="1" bottom="0"/>
+        </Texture>
+        <Texture name="$parentMiddleDisabled" parentKey="MiddleDisabled" file="Interface\HelpFrame\HelpFrameTab-Active">
+          <Size x="32" y="32"/>
+          <Anchors>
+            <Anchor point="LEFT" relativeTo="$parentLeftDisabled" relativePoint="RIGHT"/>
+          </Anchors>
+          <TexCoords left="0.25" right="0.75" top="1" bottom="0"/>
+        </Texture>
+        <Texture name="$parentRightDisabled" parentKey="RightDisabled" file="Interface\HelpFrame\HelpFrameTab-Active">
+        <Size x="16" y="32"/>
+        <Anchors>
+          <Anchor point="LEFT" relativeTo="$parentMiddleDisabled" relativePoint="RIGHT"/>
+        </Anchors>
+        <TexCoords left="0.75" right="1.0" top="1" bottom="0"/>
+      </Texture>
+        <Texture name="$parentLeft" parentKey="Left" file="Interface\HelpFrame\HelpFrameTab-Inactive">
+          <Size x="16" y="32"/>
+          <Anchors>
+            <Anchor point="TOPLEFT"/>
+          </Anchors>
+          <TexCoords left="0" right="0.25" top="1" bottom="0"/>
+        </Texture>
+        <Texture name="$parentMiddle" parentKey="Middle" file="Interface\HelpFrame\HelpFrameTab-Inactive">
+          <Size x="32" y="32"/>
+          <Anchors>
+            <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT"/>
+          </Anchors>
+          <TexCoords left="0.25" right="0.75" top="1" bottom="0"/>
+        </Texture>
+        <Texture name="$parentRight" parentKey="Right" file="Interface\HelpFrame\HelpFrameTab-Inactive">
+          <Size x="16" y="32"/>
+          <Anchors>
+            <Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT"/>
+          </Anchors>
+          <TexCoords left="0.75" right="1.0" top="1" bottom="0"/>
+        </Texture>
+      </Layer>
+    </Layers>
+    <ButtonText name="$parentText" parentKey="Text">
+      <Size x="0" y="13"/>
+      <Anchors>
+      </Anchors>
+    </ButtonText>
+    <NormalFont style="GameFontNormalSmall"/>
+    <HighlightFont style="GameFontHighlightSmall"/>
+    <DisabledFont style="GameFontDisableSmall"/>
+    <HighlightTexture name="$parentHighlightTexture" parentKey="HighlightTexture" file="Interface\PaperDollInfoFrame\UI-Character-Tab-Highlight" alphaMode="ADD">
+      <Size x="5" y="32"/>
+      <Anchors>
+        <Anchor point="TOP">
+          <Offset>
+            <AbsDimension x="2" y="8"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+    </HighlightTexture>
+  </Button>
+</Ui>

@@ -1,0 +1,37 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <!-- Template for a simple input box -->
+  <Frame name="AuctionatorConfigurationTextInput" inherits="AuctionatorConfigurationTooltip" virtual="true">
+    <!--
+      <Attributes>
+        <Attribute name="tooltipTitleText" value="" type="string"/>
+        <Attribute name="tooltipText" value="" type="string"/>
+      </Attributes>
+    -->
+    <Size y="20"/>
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigTextInputMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnMouseUp>self:OnMouseUp(button)</OnMouseUp>
+    </Scripts>
+    <Anchors>
+      <Anchor point="LEFT"/>
+      <Anchor point="RIGHT"/>
+    </Anchors>
+    <Frames>
+      <EditBox name="$parentInputBox" autoFocus="false" inherits="LargeInputBoxTemplate" parentKey="InputBox">
+        <Size x="140" y="20"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" x="25"/>
+        </Anchors>
+        <FontString inherits="ChatFontNormal" justifyH="LEFT"/>
+        <Scripts>
+          <OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+          <OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+        </Scripts>
+      </EditBox>
+    </Frames>
+  </Frame>
+</Ui>

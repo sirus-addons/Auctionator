@@ -1,0 +1,43 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigCancellingFrame" parent="InterfaceOptionsFrame">
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigCancellingFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:Save()</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentTitleArea" inherits="AuctionatorConfigurationTitleFrame" parentKey="TitleArea">
+        <Attributes>
+          <Attribute name="titleText" value="AUCTIONATOR_L_CONFIG_CANCELLING_CATEGORY" type="string"/>
+          <Attribute name="subTitleText" value="AUCTIONATOR_L_CONFIG_CANCELLING_TEXT" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Frame name="$parentUndercutScanPetsGear" inherits="AuctionatorConfigurationCheckbox" parentKey="UndercutScanPetsGear">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_UNDERCUT_SCAN_NOT_LIFO" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_UNDERCUT_SCAN_NOT_LIFO_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_UNDERCUT_SCAN_NOT_LIFO_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+      <Button name="$parentCancelUndercutShortcut" parentKey="CancelUndercutShortcut" inherits="AuctionatorKeyBindingConfigTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentUndercutScanPetsGear"/>
+        </Anchors>
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_CANCEL_UNDERCUT_SHORTCUT" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_CANCEL_UNDERCUT_SHORTCUT_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CUSTOM_KEYBOARD_SHORTCUTS" type="string"/>
+        </Attributes>
+      </Button>
+   </Frames>
+  </Frame>
+</Ui>

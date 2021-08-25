@@ -1,0 +1,72 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigSellingShortcutsFrame" parent="InterfaceOptionsFrame">
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigSellingShortcutsFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:Save()</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentTitleArea" inherits="AuctionatorConfigurationTitleFrame" parentKey="TitleArea">
+        <Attributes>
+          <Attribute name="titleText" value="AUCTIONATOR_L_CONFIG_SELLING_SHORTCUTS_CATEGORY" type="string"/>
+          <Attribute name="subTitleText" value="AUCTIONATOR_L_CONFIG_SELLING_SHORTCUTS_TEXT" type="string"/>
+        </Attributes>
+      </Frame>
+      <Frame name="$parentBagSelectShortcut" inherits="AuctionatorDropDown" parentKey="BagSelectShortcut">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_BAG_SELECT_SHORTCUT" type="string"/>
+          <Attribute name="textString" value="RIGHT_CLICK;ALT_LEFT_CLICK;ALT_RIGHT_CLICK;SHIFT_LEFT_CLICK;SHIFT_RIGHT_CLICK;DISABLED" type="string"/>
+          <Attribute name="valuesString" value="right click;alt left click;alt right click;shift left click;shift right click;none" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+      <Frame name="$parentCancelShortcut" inherits="AuctionatorDropDown" parentKey="CancelShortcut">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_CANCEL_SHORTCUT" type="string"/>
+          <Attribute name="textString" value="LEFT_CLICK;RIGHT_CLICK;ALT_LEFT_CLICK;ALT_RIGHT_CLICK;SHIFT_LEFT_CLICK;SHIFT_RIGHT_CLICK;DISABLED" type="string"/>
+          <Attribute name="valuesString" value="left click;right click;alt left click;alt right click;shift left click;shift right click;none" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentBagSelectShortcut" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+      <Frame name="$parentBuyShortcut" inherits="AuctionatorDropDown" parentKey="BuyShortcut">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_BUY_SHORTCUT" type="string"/>
+          <Attribute name="textString" value="LEFT_CLICK;RIGHT_CLICK;ALT_LEFT_CLICK;ALT_RIGHT_CLICK;SHIFT_LEFT_CLICK;SHIFT_RIGHT_CLICK;DISABLED" type="string"/>
+          <Attribute name="valuesString" value="left click;right click;alt left click;alt right click;shift left click;shift right click;none" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentCancelShortcut" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+      <Button name="$parentPostShortcut" parentKey="PostShortcut" inherits="AuctionatorKeyBindingConfigTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentBuyShortcut"/>
+        </Anchors>
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_POST_SHORTCUT" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_POST_SHORTCUT_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CUSTOM_KEYBOARD_SHORTCUTS" type="string"/>
+        </Attributes>
+      </Button>
+      <Button name="$parentSkipShortcut" parentKey="SkipShortcut" inherits="AuctionatorKeyBindingConfigTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentPostShortcut"/>
+        </Anchors>
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_SELLING_SKIP_SHORTCUT" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_SELLING_POST_SHORTCUT_TOOLTIP_TEXT" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CUSTOM_KEYBOARD_SHORTCUTS" type="string"/>
+        </Attributes>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

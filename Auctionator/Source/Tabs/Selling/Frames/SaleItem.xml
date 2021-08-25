@@ -1,0 +1,191 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorSaleItemFrameTemplate" virtual="true" parentKey="AuctionatorSaleItem">
+    <Size x="600" y="100"/>
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorSaleItemMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnEvent>self:OnEvent(event, ...)</OnEvent>
+      <OnUpdate>self:OnUpdate(elapsed)</OnUpdate>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:OnHide()</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentTitleArea" parentKey="TitleArea">
+        <Size y="24"/>
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+          <Anchor point="RIGHT"/>
+        </Anchors>
+
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" parentKey="Text" inherits="GameFontNormalLarge">
+              <Anchors>
+                <Anchor point="TOPLEFT" x="9" y="-5"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+
+      <Button name="$parentIcon" parentKey="Icon" inherits="AuctionatorBagItem">
+        <Size x="60" y="60"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT" y="-12"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>
+            Mixin(self, AuctionatorBagItemSelectedMixin)
+          </OnLoad>
+          <OnReceiveDrag>self:OnReceiveDrag()</OnReceiveDrag>
+        </Scripts>
+      </Button>
+
+      <Frame name="$parentQuantity" parentKey="Quantity" inherits="AuctionatorConfigurationNumericInputAlternate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentIcon" relativePoint="TOPRIGHT" y="-2"/>
+          <Anchor point="RIGHT" relativeTo="$parentIcon" relativePoint="RIGHT" x="200"/>
+        </Anchors>
+
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_QUANTITY" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Button name="$parentMaxButton" parentKey="MaxButton" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_MAX">
+        <Size x="70" y="22"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentQuantity" relativePoint="TOPRIGHT" x="0" y="4"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>self:GetParent():SetMax()</OnClick>
+        </Scripts>
+      </Button>
+
+      <Frame name="$parentPrice" parentKey="Price" inherits="AuctionatorConfigurationMoneyInputAlternate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentQuantity" relativePoint="BOTTOMLEFT" y="10"/>
+        </Anchors>
+
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_BUYOUT_PRICE" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Frame name="$parentBidPrice" parentKey="BidPrice" inherits="AuctionatorConfigurationMoneyInputAlternate" hidden="true">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentPrice" relativePoint="BOTTOMLEFT" y="-30"/>
+        </Anchors>
+
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_BID_PRICE" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Frame name="$parentDuration" inherits="AuctionatorConfigurationHorizontalRadioButtonGroup" parentKey="Duration">
+        <Attributes>
+          <Attribute name="groupHeadingText" value="AUCTIONATOR_L_DURATION" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOP" relativeTo="$parentTitleArea" relativePoint="BOTTOM"/>
+          <Anchor point="LEFT" relativePoint="CENTER" x="50"/>
+        </Anchors>
+        <Frames>
+          <Frame name="$parentDuration12" inherits="AuctionatorConfigurationRadioButton">
+            <Anchors>
+              <Anchor point="RIGHT" x="-180"/>
+            </Anchors>
+            <Attributes>
+              <Attribute name="labelText" value="12" type="string"/>
+              <Attribute name="value" value="12" type="number"/>
+            </Attributes>
+          </Frame>
+          <Frame name="$parentDuration24" inherits="AuctionatorConfigurationRadioButton">
+            <Anchors>
+              <Anchor point="RIGHT" x="-130"/>
+            </Anchors>
+            <Attributes>
+              <Attribute name="labelText" value="24" type="string"/>
+              <Attribute name="value" value="24" type="number"/>
+            </Attributes>
+          </Frame>
+          <Frame name="$parentDuration48" inherits="AuctionatorConfigurationRadioButton">
+            <Anchors>
+              <Anchor point="RIGHT" x="-80"/>
+            </Anchors>
+            <Attributes>
+              <Attribute name="labelText" value="48" type="string"/>
+              <Attribute name="value" value="48" type="number"/>
+            </Attributes>
+          </Frame>
+        </Frames>
+      </Frame>
+
+      <Button parentKey="PostButton" name="AuctionatorPostButton" inherits="UIPanelButtonTemplate" text="AUCTIONATOR_L_POST">
+        <Size x="194" y="22"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentDuration" relativePoint="BOTTOMLEFT" x="20"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>self:GetParent():PostItem()</OnClick>
+        </Scripts>
+      </Button>
+      <Button parentKey="SkipButton" name="AuctionatorSkipPostingButton" inherits="UIPanelButtonTemplate" text="AUCTIONATOR_L_SKIP" hidden="true">
+        <Size x="80" y="22"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="AuctionatorPostButton" relativePoint="TOPRIGHT"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>self:GetParent():SkipItem()</OnClick>
+        </Scripts>
+      </Button>
+      <Button name="$parentRefreshButton" inherits="RefreshButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPRIGHT" x="110"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            self:GetParent():RefreshButtonClicked()
+          </OnClick>
+        </Scripts>
+     </Button>
+     <Frame name="$parentMultisellProgress" parentKey="MultisellProgress">
+       <Scripts>
+         <OnLoad>
+           Mixin(self, AuctionatorMultisellProgress)
+         </OnLoad>
+         <OnEvent>self:OnEvent(event, ...)</OnEvent>
+         <OnShow>self:OnShow()</OnShow>
+         <OnHide>self:OnHide()</OnHide>
+       </Scripts>
+     </Frame>
+    </Frames>
+
+    <Layers>
+      <Layer level="BACKGROUND">
+        <FontString name="$parentDeposit" inherits="GameFontNormal" parentKey="Deposit" Text="AUCTIONATOR_L_DEPOSIT"/>
+      </Layer>
+
+      <Layer level="BACKGROUND">
+        <FontString name="$parentDepositPrice" inherits="GameFontHighlight" parentKey="DepositPrice">
+          <Size y="25"/>
+        </FontString>
+      </Layer>
+
+        <!-- Total price (money display [non editable]) -->
+      <Layer level="BACKGROUND">
+        <FontString name="$parentTotal" inherits="GameFontNormal" parentKey="Total" Text="AUCTIONATOR_L_TOTAL_PRICE"/>
+      </Layer>
+
+      <Layer level="BACKGROUND">
+        <FontString name="$parentTotalPrice" inherits="GameFontHighlight" parentKey="TotalPrice">
+          <Size y="25"/>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

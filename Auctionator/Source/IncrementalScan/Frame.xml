@@ -1,0 +1,11 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorIncrementalScanFrameTemplate" parent="UIParent" hidden="true" virtual="true">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorIncrementalScanFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnEvent>self:OnEvent(event, ...)</OnEvent>
+    </Scripts>
+  </Frame>
+</Ui>

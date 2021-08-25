@@ -1,0 +1,48 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <!-- Template for money input with label -->
+  <Frame name="AuctionatorConfigurationMoneyInputAlternate" inherits="AuctionatorConfigurationTooltip" virtual="true">
+    <!--
+      <Attributes>
+        Number is in copper, but will round to next lowest silver since copper not used in AH
+        <Attribute name="value" value="0" type="number"/>
+        <Attribute name="labelText" value="" type="string"/>
+        <Attribute name="tooltipTitleText" value="" type="string"/>
+        <Attribute name="tooltipText" value="" type="string"/>
+      </Attributes>
+    -->
+    <Size y="7"/>
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigMoneyInputMixin)
+        self:OnLoad()
+
+        self.Label:ClearAllPoints()
+        self.Label:SetPoint("RIGHT", self.MoneyInput, "LEFT", -10, 0)
+      </OnLoad>
+    </Scripts>
+    <Anchors>
+      <Anchor point="LEFT"/>
+      <Anchor point="RIGHT"/>
+    </Anchors>
+    <Frames>
+      <Frame name="$parentMoneyInput" inherits="LargeMoneyInputFrameTemplate" parentKey="MoneyInput">
+        <Size x="150" y="20"/>
+        <Attributes>
+          <Attribute name="hideCopper" value="true" type="boolean"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="120"/>
+        </Anchors>
+        <Scripts>
+          <OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+        </Scripts>
+      </Frame>
+    </Frames>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <FontString name="$parentLabel" inherits="GameFontHighlight" parentKey="Label"/>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

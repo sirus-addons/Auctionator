@@ -1,0 +1,261 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigurationTabFrameTemplate" virtual="true" inherits="AuctionatorTabFrameTemplate" parentKey="AuctionatorConfigFrame">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigTabMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentAuthorHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="AuthorHeading">
+        <Attributes>
+          <Attribute name="headingText" value="AUCTIONATOR_L_AUTHOR_HEADER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="RIGHT" relativePoint="CENTER" x="-150"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentAuthor" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="Author">
+        <Attributes>
+          <Attribute name="subHeadingText" value="Borj(amacare)" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAuthorHeading" relativePoint="BOTTOMLEFT" y="10"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentContributorsHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="ContributorsHeading">
+        <Attributes>
+          <Attribute name="headingText" value="AUCTIONATOR_L_CONTRIBUTORS_HEADER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAuthorHeading" relativePoint="TOPRIGHT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentContributors" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="Contributors">
+        <Attributes>
+          <Attribute name="subHeadingText" value="plusmouse" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentContributorsHeading" relativePoint="BOTTOMLEFT" y="10"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentVersionHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="VersionHeading">
+        <Attributes>
+          <Attribute name="headingText" value="AUCTIONATOR_L_VERSION_HEADER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentContributorsHeading" relativePoint="TOPRIGHT" x="-280"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentVersion" inherits="AuctionatorConfigurationSubHeadingFrame" parentKey="Version">
+        <Attributes>
+          <Attribute name="subHeadingText" value="AUCTIONATOR_STATE_CURRENT_VERSION" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentVersionHeading" relativePoint="BOTTOMLEFT" y="10"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentEngageHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="EngageHeading">
+        <Attributes>
+          <Attribute name="headingText" value="AUCTIONATOR_L_ENGAGE_HEADER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentAuthor" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentDiscordLink" inherits="AuctionatorConfigurationCopyAndPasteFrame" parentKey="DiscordLink">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_DISCORD" type="string"/>
+          <Attribute name="copyText" value="https://tinyurl.com/AuctionatorDiscord" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_DISCORD_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_DISCORD_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentEngageHeading" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentBugReportLink" inherits="AuctionatorConfigurationCopyAndPasteFrame" parentKey="BugReportLink">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_BUG_REPORT" type="string"/>
+          <Attribute name="copyText" value="https://tinyurl.com/AuctionatorBug" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_BUG_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_BUG_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentDiscordLink" relativePoint="BOTTOMLEFT" y="10"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentTechnicalRoadmap" inherits="AuctionatorConfigurationCopyAndPasteFrame" parentKey="TechnicalRoadmap">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_ROADMAP" type="string"/>
+          <Attribute name="copyText" value="https://tinyurl.com/Auctionator83Release" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_ROADMAP" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_ROADMAP_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentBugReportLink" relativePoint="BOTTOMLEFT" y="10"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentTranslatorsHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="TranslatorsHeading">
+        <Attributes>
+          <Attribute name="headingText" value="AUCTIONATOR_L_TRANSLATORS_HEADER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTechnicalRoadmap" relativePoint="BOTTOMLEFT" y="15"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentdeDE" inherits="AuctionatorTranslatorTemplate" parentKey="deDE">
+        <Attributes>
+          <Attribute name="textureLocation" type="string" value="Interface\AddOns\Auctionator\Images\deDE"/>
+          <Attribute name="translators" type="string" value="flow0284, SunnySunflow"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_TRANSLATORS_GERMAN" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTranslatorsHeading" relativePoint="BOTTOMLEFT" x="20"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentptBR" inherits="AuctionatorTranslatorTemplate" parentKey="ptBR">
+        <Attributes>
+          <Attribute name="textureLocation" type="string" value="Interface\AddOns\Auctionator\Images\ptBR"/>
+          <Attribute name="translators" type="string" value="Dagnet"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_TRANSLATORS_BRAZIL_PORTUGUEUSE" type="string"/>
+        </Attributes>
+			  <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentdeDE" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentzhCN" inherits="AuctionatorTranslatorTemplate" parentKey="zhCN">
+        <Attributes>
+          <Attribute name="textureLocation" type="string" value="Interface\AddOns\Auctionator\Images\zhCN"/>
+          <Attribute name="translators" type="string" value="sugymaylis, LvWind"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_TRANSLATORS_SIMPLIFIED_CHINESE" type="string"/>
+        </Attributes>
+			  <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentptBR" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentzhTW" inherits="AuctionatorTranslatorTemplate" parentKey="zhTW">
+        <Attributes>
+          <Attribute name="textureLocation" type="string" value="Interface\AddOns\Auctionator\Images\zhTW"/>
+          <Attribute name="translators" type="string" value="RainbowUI"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_TRANSLATORS_TRADITIONAL_CHINESE" type="string"/>
+        </Attributes>
+			  <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentzhCN" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentesES" inherits="AuctionatorTranslatorTemplate" parentKey="esES">
+        <Attributes>
+          <Attribute name="textureLocation" type="string" value="Interface\AddOns\Auctionator\Images\esES"/>
+          <Attribute name="translators" type="string" value="sugymaylis, Franxavis"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_TRANSLATORS_SPANISH" type="string"/>
+        </Attributes>
+			  <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentzhTW" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentesMX" inherits="AuctionatorTranslatorTemplate" parentKey="esMX">
+        <Attributes>
+          <Attribute name="textureLocation" type="string" value="Interface\AddOns\Auctionator\Images\esMX"/>
+          <Attribute name="translators" type="string" value="sugymaylis, ftg3"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_TRANSLATORS_LATIN_SPANISH" type="string"/>
+        </Attributes>
+			  <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentesES" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentfrFR" inherits="AuctionatorTranslatorTemplate" parentKey="frFR">
+        <Attributes>
+          <Attribute name="textureLocation" type="string" value="Interface\AddOns\Auctionator\Images\frFR"/>
+          <Attribute name="translators" type="string" value="Prissti"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_TRANSLATORS_FRENCH" type="string"/>
+        </Attributes>
+			  <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentesMX" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentitIT" inherits="AuctionatorTranslatorTemplate" parentKey="itIT">
+        <Attributes>
+          <Attribute name="textureLocation" type="string" value="Interface\AddOns\Auctionator\Images\itIT"/>
+          <Attribute name="translators" type="string" value="faniel80, nimaus12"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_TRANSLATORS_ITALIAN" type="string"/>
+        </Attributes>
+			  <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentfrFR" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentkoKR" inherits="AuctionatorTranslatorTemplate" parentKey="koKR">
+        <Attributes>
+          <Attribute name="textureLocation" type="string" value="Interface\AddOns\Auctionator\Images\koKR"/>
+          <Attribute name="translators" type="string" value="Vee"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_TRANSLATORS_KOREAN" type="string"/>
+        </Attributes>
+			  <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentitIT" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentruRU" inherits="AuctionatorTranslatorTemplate" parentKey="ruRU">
+        <Attributes>
+          <Attribute name="textureLocation" type="string" value="Interface\AddOns\Auctionator\Images\ruRU"/>
+          <Attribute name="translators" type="string" value="Hubbotu"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_TRANSLATORS_RUSSIAN" type="string"/>
+        </Attributes>
+			  <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentkoKR" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Button name="$parentScanButton" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_FULL_SCAN_BUTTON" parentKey="ScanButton">
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" y="7" x="-3"/>
+        </Anchors>
+        <Attributes>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_FULL_SCAN_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Scripts>
+          <OnLoad>
+            Mixin(self, AuctionatorScanButtonMixin)
+            self:OnLoad()
+          </OnLoad>
+          <OnClick>self:OnClick(button)</OnClick>
+        </Scripts>
+      </Button>
+      <Frame inherits="AuctionatorFullScanStatusTemplate">
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" relativeTo="$parentScanButton" relativePoint="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT" relativeTo="$parentScanButton" relativePoint="TOPRIGHT"/>
+        </Anchors>
+      </Frame>
+
+      <Button name="$parentOptionsButton" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_OPEN_ADDON_OPTIONS" parentKey="OptionsButton">
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativeTo="$parentScanButton" relativePoint="TOPLEFT" x="-3"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>self:GetParent():OpenOptions()</OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

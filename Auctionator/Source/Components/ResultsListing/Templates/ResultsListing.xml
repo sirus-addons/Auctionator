@@ -1,0 +1,91 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorResultsListingTemplate" virtual="true" parentKey="ResultsListing">
+
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorResultsListingMixin)
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnUpdate>self:OnUpdate(elapsed)</OnUpdate>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentHeaderContainer" parentKey="HeaderContainer">
+        <Size y="19"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" y="-7" x="-20"/>
+          <Anchor point="RIGHT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentCustomiseDropDown" parentKey="CustomiseDropDown" inherits="AuctionatorCustomiseColumnsDropDownTemplate" hidden="true"/>
+
+
+      <ScrollFrame name="$parentScrollFrame" parentKey="ScrollFrame" inherits="HybridScrollFrameTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentHeaderContainer" relativePoint="BOTTOMLEFT"/>
+          <Anchor point="RIGHT" relativeTo="$parentHeaderContainer" relativePoint="RIGHT" x="-2"/>
+          <Anchor point="BOTTOM" relativePoint="BOTTOMRIGHT"/>
+        </Anchors>
+        <Frames>
+          <Slider name="$parentScrollBar" parentKey="scrollBar" inherits="HybridScrollBarTemplate">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" y="-16"/>
+              <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" y="17"/>
+            </Anchors>
+            <Layers>
+              <Layer level="BACKGROUND">
+                <Texture name="$parentBackground" parentKey="Background" file="Interface\FrameGeneral\UI-Background-Marble" horizTile="true" vertTile="true" setAllPoints="true"/>
+              </Layer>
+            </Layers>
+          </Slider>
+        </Frames>
+        <Layers>
+          <Layer level="OVERLAY">
+            <FontString name="$parentNoResultsText" parentKey="NoResultsText" inherits="GameFontNormal" hidden="true" text="AUCTIONATOR_L_NO_RESULTS">
+              <Anchors>
+                <Anchor point="CENTER"/>
+              </Anchors>
+              <Shadow>
+                <Offset>
+                  <AbsDimension x="1" y="-1"/>
+                </Offset>
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+            <Texture name="$parentLoadingSpinner" parentKey="LoadingSpinner" hidden="true">
+              <Size x="146" y="146"/>
+              <Anchors>
+                <Anchor point="CENTER" x="-12" y="0"/>
+              </Anchors>
+              <Animations>
+                <AnimationGroup parentKey="SpinnerAnim" looping="REPEAT">
+                  <Rotation order="1" duration="1" degrees="-360"/>
+                </AnimationGroup>
+              </Animations>
+            </Texture>
+            <FontString name="$parentResultsText" parentKey="ResultsText" inherits="GameFontNormal" hidden="true" text="AUCTIONATOR_L_FETCHING_ITEM_INFO">
+              <Anchors>
+                  <Anchor point="TOP" relativeTo="$parentLoadingSpinner" relativePoint="CENTER" x="0" y="24"/>
+                  <Anchor point="LEFT" x="45" y="0"/>
+                  <Anchor point="RIGHT" x="-67" y="0"/>
+                  <Anchor point="BOTTOM" relativeTo="$parentLoadingSpinner" relativePoint="CENTER" x="0" y="-24"/>
+              </Anchors>
+              <Shadow>
+                <Offset>
+                  <AbsDimension x="1" y="-1"/>
+                </Offset>
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnLoad>
+            self.LoadingSpinner:SetAtlas("auctionhouse-ui-loadingspinner")
+          </OnLoad>
+        </Scripts>
+      </ScrollFrame>
+    </Frames>
+  </Frame>
+</Ui>

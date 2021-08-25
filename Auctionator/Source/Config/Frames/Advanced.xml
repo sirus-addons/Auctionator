@@ -1,0 +1,51 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigAdvancedFrame" parent="InterfaceOptionsFrame">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorConfigAdvancedFrameMixin)
+        self:OnLoad()
+      </OnLoad>
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:Save()</OnHide>
+    </Scripts>
+    <Frames>
+      <Frame name="$parentTitleArea" inherits="AuctionatorConfigurationTitleFrame" parentKey="TitleArea">
+        <Attributes>
+          <Attribute name="titleText" value="AUCTIONATOR_L_CONFIG_ADVANCED_CATEGORY" type="string"/>
+          <Attribute name="subTitleText" value="AUCTIONATOR_L_CONFIG_ADVANCED_TEXT" type="string"/>
+        </Attributes>
+      </Frame>
+
+      <Frame name="$parentNotReplicateScan" inherits="AuctionatorConfigurationCheckbox" parentKey="NotReplicateScan">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_ALTERNATE_SCAN" type="string" />
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_ALTERNATE_SCAN_HEADER" type="string" />
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_ALTERNATE_SCAN_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT" />
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentDebugHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="DebugHeading">
+        <Attributes>
+          <Attribute name="headingText" value="AUCTIONATOR_L_CONFIG_DEVELOPER" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentNotReplicateScan" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+
+      <Frame name="$parentDebug" inherits="AuctionatorConfigurationCheckbox" parentKey="Debug">
+        <Attributes>
+          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_DEBUG" type="string"/>
+          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_DEBUG_TOOLTIP_HEADER" type="string"/>
+          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_DEBUG_TOOLTIP_TEXT" type="string"/>
+        </Attributes>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentDebugHeading" relativePoint="BOTTOMLEFT"/>
+        </Anchors>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

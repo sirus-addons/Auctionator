@@ -1,0 +1,10 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorShoppingListResultsRowTemplate" inherits="AuctionatorResultsRowTemplate" virtual="true" enableMouse="true">
+    <Scripts>
+      <OnLoad>
+        Mixin(self, AuctionatorShoppingListResultsRowMixin)
+        self:OnLoad()
+      </OnLoad>
+    </Scripts>
+  </Frame>
+</Ui>
