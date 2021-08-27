@@ -53,6 +53,19 @@ hooksecurefunc (GameTooltip, "SetGuildBankItem",
   end
 );
 
+hooksecurefunc (GameTooltip, "SetTradeSkillItem",
+  function(tip, skill, id)
+    local itemLink = GetTradeSkillItemLink(skill)
+    local itemCount = GetTradeSkillNumMade(skill)
+    if id then
+      itemLink = GetTradeSkillReagentItemLink(skill, id)
+      itemCount = select(3, GetTradeSkillReagentInfo(skill, id))
+    end
+
+    Auctionator.Tooltip.ShowTipWithPricing(tip, itemLink, itemCount)
+  end
+);
+
 -- This is called when mousing over an item in the loot window
 hooksecurefunc (GameTooltip, "SetLootItem",
   function (tip, slot)
