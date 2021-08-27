@@ -98,7 +98,7 @@ function Auctionator.Tooltip.ShowTipWithPricingDBKey(tooltipFrame, dbKeys, itemL
   AuctionatorScanningTooltip:SetHyperlink(itemLink)
   AuctionatorScanningTooltip:Show()
 
-  for i = 1, 5 do
+  for i = 1, ENABLE_COLORBLIND_MODE == "1" and 5 or 4 do
     local leftText = _G["AuctionatorScanningTooltipTextLeft"..i]
     if not leftText then
       break
