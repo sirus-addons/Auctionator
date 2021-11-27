@@ -462,13 +462,13 @@ function AuctionatorSaleItemMixin:ProcessItemResults(itemKey)
   elseif result ~= nil and result.containsOwnerItem then
     -- Posting an item I have alread posted, and that is the current lowest price, so just
     -- use this price
-    postingPrice = result.buyoutAmount
+    postingPrice = result.buyoutAmount or result.bidAmount
   else
     -- Otherwise, we're not the lowest price, so calculate based on user preferences
     if Auctionator.Utilities.IsNotLIFOItemKey(itemKey) then
-      postingPrice = Auctionator.Selling.CalculateNotLIFOPriceFromPrice(result.buyoutAmount)
+      postingPrice = Auctionator.Selling.CalculateNotLIFOPriceFromPrice(result.buyoutAmount or result.bidAmount)
     else --Not LIFO
-      postingPrice = Auctionator.Selling.CalculateLIFOPriceFromPrice(result.buyoutAmount)
+      postingPrice = Auctionator.Selling.CalculateLIFOPriceFromPrice(result.buyoutAmount or result.bidAmount)
     end
   end
 

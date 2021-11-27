@@ -5,6 +5,6 @@ function AuctionatorPostingHistoryRowMixin:OnClick(button, ...)
 
   Auctionator.EventBus
     :RegisterSource(self, "PostingHistoryRow")
-    :Fire(self, Auctionator.Selling.Events.PriceSelected, self.rowData.price)
+    :Fire(self, Auctionator.Selling.Events.PriceSelected, self.rowData.price or self.rowData.bidPrice)
     :UnregisterSource(self)
 end
