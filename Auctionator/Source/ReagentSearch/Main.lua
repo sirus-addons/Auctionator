@@ -52,7 +52,7 @@ function Auctionator.ReagentSearch.GetAHProfit()
   local id = GetTradeSkillSelectionIndex()
   local link = GetTradeSkillItemLink(id)
 
-  local currentAH = Auctionator.API.v1.GetAuctionPriceByItemLink(AUCTIONATOR_L_REAGENT_SEARCH, link)
+  local currentAH = link and Auctionator.API.v1.GetAuctionPriceByItemLink(AUCTIONATOR_L_REAGENT_SEARCH, link)
   if currentAH == nil then
     currentAH = 0
   end
