@@ -49,8 +49,10 @@ function Auctionator.AH.IsNotThrottled()
 end
 
 function Auctionator.AH.CancelAuction(...)
-  -- Can't be queued, "protected" call
-  C_AuctionHouse.CancelAuction(...)
+  local args = {...}
+  Auctionator.AH.Queue:Enqueue(function()
+    C_AuctionHouse.CancelAuction(unpack(args))
+  end)
 end
 
 function Auctionator.AH.ReplicateItems()

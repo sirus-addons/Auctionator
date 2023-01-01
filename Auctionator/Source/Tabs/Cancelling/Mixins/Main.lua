@@ -7,6 +7,7 @@ function AuctionatorCancellingFrameMixin:OnLoad()
 
   Auctionator.EventBus:Register(self, {
     Auctionator.Cancelling.Events.RequestCancel,
+    Auctionator.Cancelling.Events.RequestAllCancel,
     Auctionator.Cancelling.Events.TotalUpdated,
   })
 
@@ -26,6 +27,11 @@ function AuctionatorCancellingFrameMixin:ReceiveEvent(eventName, eventData, ...)
     Auctionator.AH.CancelAuction(eventData)
 
     PlaySound(SOUNDKIT.IG_MAINMENU_OPEN)
+
+  elseif eventName == Auctionator.Cancelling.Events.RequestAllCancel then
+    Auctionator.Debug.Message("Executing all cancel request", eventData)
+
+    Auctionator.AH.CancelAuction(eventData)
 
   elseif eventName == Auctionator.Cancelling.Events.TotalUpdated then
     self.Total:SetText(

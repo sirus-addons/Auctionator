@@ -94,6 +94,14 @@
               <OnClick>self:GetParent():CancelNextAuction()</OnClick>
             </Scripts>
           </Button>
+          <Button name="AuctionatorCancelAllButton" inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_CANCEL_ALL" parentKey="CancelAllButton">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeTo="AuctionatorCancelUndercutButton" relativePoint="TOPRIGHT" x="3"/>
+            </Anchors>
+            <Scripts>
+              <OnClick>self:GetParent():CancelAllAuctions()</OnClick>
+            </Scripts>
+          </Button>
         </Frames>
       </Frame>
     </Frames>

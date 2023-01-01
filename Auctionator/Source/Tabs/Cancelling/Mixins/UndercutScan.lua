@@ -16,6 +16,7 @@ function AuctionatorUndercutScanMixin:OnLoad()
   Auctionator.EventBus:Register(self, {
     Auctionator.Cancelling.Events.RequestCancel,
     Auctionator.Cancelling.Events.RequestCancelUndercut,
+    Auctionator.AH.Events.Ready,
   })
 
   self.undercutAuctions = {}
@@ -142,6 +143,12 @@ function AuctionatorUndercutScanMixin:ReceiveEvent(eventName, auctionID)
     if self.CancelNextButton:IsEnabled() then
       self:CancelNextAuction()
     end
+  elseif eventName == Auctionator.AH.Events.Ready then
+    if Auctionator.AH.Internals.throttling:IsReady() then
+      self:SetCancel()
+
+      self.CancelAllButton:Enable()
+    end
   end
 end
 
@@ -224,4 +231,22 @@ function AuctionatorUndercutScanMixin:CancelNextAuction()
   )
 
   self.CancelNextButton:Disable()
+end
+
+function AuctionatorUndercutScanMixin:CancelAllAuctions()
+  Auctionator.Debug.Message("AuctionatorUndercutScanMixin:CancelAllAuctions()")
+
+  self.CancelNextButton:Disable()
+  self.CancelAllButton:Disable()
+
+  for index = C_AuctionHouse.GetNumOwnedAuctions(), 1, -1  do
+    local info = C_AuctionHouse.GetOwnedAuctionInfo(index)
+
+    if info and info.auctionID then
+      Auctionator.EventBus
+        :RegisterSource(self, "CancelAllAuctions")
+        :Fire(self, Auctionator.Cancelling.Events.RequestAllCancel, info.auctionID)
+        :UnregisterSource(self)
+    end
+  end
 end

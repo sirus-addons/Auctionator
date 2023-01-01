@@ -24,6 +24,7 @@ L["BUG_TOOLTIP_TEXT"] = "Если вы столкнулись с ошибкой 
 L["BUYOUT_AUCTION_INFO"] = "%s выкуп за %s"
 L["BUYOUT_PRICE"] = "Цена Выкупа"
 L["CANCEL"] = "Отмена"
+L["CANCEL_ALL"] = "Отменить все аукционы"
 L["CANCEL_UNDERCUT"] = "Отмена аукциона"
 L["CANCELLING_TAB"] = "Отмена"
 L["CANCELLING_TAB_HEADER"] = "Auctionator - Отмена Аукциона"
