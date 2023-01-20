@@ -164,11 +164,13 @@ hooksecurefunc("InboxFrameItem_OnEnter",
         if name then
           itemLink = GetInboxItemLink(self.index, attachmentIndex)
 
-          table.insert(itemEntries, {
-            link = itemLink,
-            count = itemCount,
-            name = name
-          })
+          if itemLink then
+            table.insert(itemEntries, {
+              link = itemLink,
+              count = itemCount,
+              name = name
+            })
+          end
         end
       end
 
