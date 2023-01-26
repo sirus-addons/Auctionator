@@ -24,7 +24,9 @@ function AuctionatorSellSearchRowMixin:OnClick(button, ...)
   Auctionator.Debug.Message("AuctionatorSellSearchRowMixin:OnClick()")
 
   if Auctionator.Utilities.IsShortcutActive(Auctionator.Config.Get(Auctionator.Config.Options.SELLING_CANCEL_SHORTCUT), button) then
-    if C_AuctionHouse.CanCancelAuction(self.rowData.auctionID) then
+    if C_AuctionHouse.CanCancelAuction(self.rowData.auctionID) and not self.rowData.cancelled then
+      self.rowData.cancelled = true
+
       Auctionator.EventBus
         :RegisterSource(self, "SellSearchRow")
         :Fire(self, Auctionator.Cancelling.Events.RequestCancel, self.rowData.auctionID)

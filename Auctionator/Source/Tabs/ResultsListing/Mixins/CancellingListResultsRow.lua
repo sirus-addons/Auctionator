@@ -9,7 +9,7 @@ function AuctionatorCancellingListResultsRowMixin:OnClick(...)
   elseif IsModifiedClick("CHATLINK") then
     ChatEdit_InsertLink(self.rowData.itemLink)
 
-  else
+  elseif not self.rowData.cancelled then
     self.rowData.cancelled = true
     self:ApplyFade()
 
