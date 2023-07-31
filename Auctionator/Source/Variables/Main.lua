@@ -1,6 +1,7 @@
 local VERSION_8_3 = 6
 local POSTING_HISTORY_DB_VERSION = 1
 local VENDOR_PRICE_CACHE_DB_VERSION = 1
+local SHOPPING_LISTS_VERSION = 1
 
 function Auctionator.Variables.Initialize()
   Auctionator.Variables.InitializeSavedState()
@@ -112,9 +113,32 @@ function Auctionator.Variables.InitializePostingHistory()
   Auctionator.PostingHistory = CreateAndInitFromMixin(Auctionator.PostingHistoryMixin, AUCTIONATOR_POSTING_HISTORY)
 end
 
+local function ModernizeShopingLists()
+  if not Auctionator.SavedState.ShoppingListsVersion then
+    for _, list in ipairs(AUCTIONATOR_SHOPPING_LISTS) do
+      if type(list.items) == "table" then
+        for index, item in ipairs(list.items) do
+          if type(item) == "string" then
+            local s, e = string.find(strlower(item), "изначальная тьма", 1, true)
+            if s and e then
+              list.items[index] = strconcat(string.sub(item, 1, s - 1), "Изначальная тень", string.sub(item, e + 1))
+            end
+          end
+        end
+      end
+    end
+  end
+  Auctionator.SavedState.ShoppingListsVersion = SHOPPING_LISTS_VERSION
+end
+
 function Auctionator.Variables.InitializeShoppingLists()
   if AUCTIONATOR_SHOPPING_LISTS == nil then
     AUCTIONATOR_SHOPPING_LISTS = {}
+  else
+    if Auctionator.SavedState.ShoppingListsVersion == nil or
+     Auctionator.SavedState.ShoppingListsVersion ~= SHOPPING_LISTS_VERSION then
+      ModernizeShopingLists()
+    end
   end
 
   Auctionator.ShoppingLists.Lists = AUCTIONATOR_SHOPPING_LISTS
