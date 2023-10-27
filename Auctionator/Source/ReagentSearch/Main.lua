@@ -1,6 +1,9 @@
 function Auctionator.ReagentSearch.DoTradeSkillReagentsSearch()
   local id = GetTradeSkillSelectionIndex()
   local skillName, _, _, _, altVerb = GetTradeSkillInfo(id);
+  if type(skillName) == "string" then
+    skillName = string.gsub(skillName, "^"..AUCTIONATOR_L_ENCHANT, AUCTIONATOR_L_SCROLL_OF_ENCHANTS);
+  end
   local items = {skillName}
 
   for i = 1, GetTradeSkillNumReagents(id) do

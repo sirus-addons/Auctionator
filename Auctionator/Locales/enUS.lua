@@ -453,6 +453,8 @@ AUCTIONATOR_LOCALES.enUS = function()
   L["EXPORT_RESULTS"] = "Export Results"
   L["TO_CRAFT_COLON"] = "To Craft:"
   L["PROFIT_COLON"] = "Profit:"
+  L["SCROLL_OF_ENCHANTS"] = "Scroll of Enchants"
+  L["ENCHANT"] = "Enchant"
 
   L["DETAILS_ENCHANT_TOOLTIPS"] = "Details enchant tooltips."
   L["DETAILS_ENCHANT_TOOLTIPS_TEXT"] = ""
