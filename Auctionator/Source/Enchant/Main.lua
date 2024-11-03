@@ -3,6 +3,19 @@ local armorClassID = {
   [ITEM_CLASS_4] = LE_ITEM_CLASS_ARMOR,
 }
 
+local function getItemID(itemLink)
+  if type(itemLink) == "string" then
+    return tonumber(string.match(itemLink, "item:(%d+)")) or 0
+  end
+  return 0
+end
+
+local disenchantBlacklist = {
+  [20406] = true,
+  [20407] = true,
+  [20408] = true,
+}
+
 local function isDisenchantable(itemInfo)
   return
     #itemInfo == 0 or (
@@ -11,7 +24,8 @@ local function isDisenchantable(itemInfo)
         itemInfo[Auctionator.Constants.ITEM_INFO.ITEM_TYPE] == ITEM_CLASS_4
       ) and
       itemInfo[Auctionator.Constants.ITEM_INFO.RARITY] >= Enum.ItemQuality.Uncommon and
-      itemInfo[Auctionator.Constants.ITEM_INFO.RARITY] <= Enum.ItemQuality.Epic
+      itemInfo[Auctionator.Constants.ITEM_INFO.RARITY] <= Enum.ItemQuality.Epic and
+      not disenchantBlacklist[getItemID(itemInfo[Auctionator.Constants.ITEM_INFO.LINK])]
     )
 end
 
