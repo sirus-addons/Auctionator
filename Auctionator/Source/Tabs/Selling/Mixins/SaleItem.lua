@@ -432,9 +432,34 @@ function AuctionatorSaleItemMixin:ProcessCommodityResults(itemID, ...)
   self:UpdateSalesPrice(postingPrice)
 end
 
+local function RowDataCheapestBuyoutComparison(lhs, rhs)
+  if (lhs == nil) and (rhs == nil) then
+    return false;
+  elseif (lhs == nil) or (rhs == nil) then
+    return lhs ~= nil;
+  elseif (lhs.buyoutAmount ~= nil) and (rhs.buyoutAmount ~= nil) then
+    return lhs.buyoutAmount < rhs.buyoutAmount;
+  elseif (lhs.buyoutAmount ~= nil) or (rhs.buyoutAmount ~= nil) then
+    return lhs.buyoutAmount ~= nil;
+  elseif (lhs.bidAmount ~= nil) and (rhs.bidAmount ~= nil) then
+    return lhs.bidAmount < rhs.bidAmount;
+  elseif (lhs.bidAmount ~= nil) or (rhs.bidAmount ~= nil) then
+    return lhs.bidAmount ~= nil;
+  end
+  return false;
+end
+
 function AuctionatorSaleItemMixin:GetItemResult(itemKey)
   if C_AuctionHouse.GetItemSearchResultsQuantity(itemKey) > 0 then
-    return C_AuctionHouse.GetItemSearchResultInfo(itemKey, 1)
+    local bestResult = nil
+    local numSearchResults = C_AuctionHouse.GetNumItemSearchResults(itemKey)
+    for i = 1, numSearchResults do
+      local searchResult = C_AuctionHouse.GetItemSearchResultInfo(itemKey, i)
+      if RowDataCheapestBuyoutComparison(searchResult, bestResult) then
+        bestResult = searchResult
+      end
+      end
+    return bestResult
   else
     return nil
   end
@@ -443,23 +468,24 @@ end
 function AuctionatorSaleItemMixin:ProcessItemResults(itemKey)
   Auctionator.Debug.Message("AuctionatorSaleItemMixin:ProcessItemResults()")
 
-  local dbKeys = Auctionator.Utilities.DBKeyFromBrowseResult({ itemKey = itemKey })
-
-  local result = self:GetItemResult(itemKey)
-
-  -- Update DB with current lowest price
-  if result ~= nil then
+  -- Update DB with current lowest price (accomodating for itemKey variations
+  -- from the searched for itemKey)
+  if C_AuctionHouse.GetNumItemSearchResults(itemKey) > 0 then
+    local result = C_AuctionHouse.GetItemSearchResultInfo(itemKey, 1)
+    local dbKeys = Auctionator.Utilities.DBKeyFromBrowseResult({ itemKey = result.itemKey })
     for _, key in ipairs(dbKeys) do
       Auctionator.Database:SetPrice(key, result.buyoutAmount or result.bidAmount)
     end
   end
+
+  local result = self:GetItemResult(itemKey)
 
   local postingPrice = nil
 
   if result == nil then
     -- This item was not found in the AH, so use the lowest price from the dbKey
     postingPrice = Auctionator.Database:GetFirstPrice(dbKeys)
-  elseif result ~= nil and result.containsOwnerItem then
+  elseif result.containsOwnerItem then
     -- Posting an item I have alread posted, and that is the current lowest price, so just
     -- use this price
     postingPrice = result.buyoutAmount or result.bidAmount
