@@ -1,15 +1,22 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
   <Button name="AuctionatorTabButtonTemplate" virtual="true" parent="AuctionHouseFrame" inherits="AuctionHouseFrameDisplayModeTabTemplate">
-    <Scripts>
-      <OnLoad>
-        Mixin(self, AuctionatorTabMixin)
+    <Frames>
+      <Frame parentKey="Controller">
+        <Scripts>
+          <OnLoad>
+            local tab = self:GetParent()
+            Mixin(tab, AuctionatorTabMixin)
 
-        local parent = self:GetParent()
-        if not parent.Tabs then
-          parent.Tabs = {}
-        end
-        table.insert(parent.Tabs, self)
-      </OnLoad>
+            local parent = tab:GetParent()
+            if not parent.Tabs then
+              parent.Tabs = {}
+            end
+            table.insert(parent.Tabs, tab)
+          </OnLoad>
+        </Scripts>
+      </Frame>
+    </Frames>
+    <Scripts>
       <OnShow>self:OnShow()</OnShow>
     </Scripts>
   </Button>

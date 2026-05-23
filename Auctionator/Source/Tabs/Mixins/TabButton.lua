@@ -20,8 +20,9 @@ function AuctionatorTabMixin:Initialize(name, tabTemplate, tabHeader, displayMod
   )
   self.frameRef:Hide()
   AuctionHouseFrame.tabsForDisplayMode[name] = #AuctionHouseFrame.Tabs
-
-  self:SetPoint("LEFT", AuctionHouseFrame.Tabs[#AuctionHouseFrame.Tabs - 1], "RIGHT", -15, 0)
+  
+  local middleDisabled = self.MiddleDisabled or _G[self:GetName().."MiddleDisabled"]
+  self:SetPoint("LEFT", AuctionHouseFrame.Tabs[#AuctionHouseFrame.Tabs - 1], "RIGHT", middleDisabled and -15 or 3, 0)
 end
 
 function AuctionatorTabMixin:Selected()
