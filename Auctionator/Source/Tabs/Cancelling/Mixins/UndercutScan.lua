@@ -243,10 +243,7 @@ function AuctionatorUndercutScanMixin:CancelAllAuctions()
     local info = C_AuctionHouse.GetOwnedAuctionInfo(index)
 
     if info and info.auctionID then
-      Auctionator.EventBus
-        :RegisterSource(self, "CancelAllAuctions")
-        :Fire(self, Auctionator.Cancelling.Events.RequestAllCancel, info.auctionID)
-        :UnregisterSource(self)
+      Auctionator.EventBus:Fire(self, Auctionator.Cancelling.Events.RequestAllCancel, info.auctionID)
     end
   end
 end
