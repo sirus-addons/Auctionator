@@ -464,6 +464,7 @@ AUCTIONATOR_LOCALES.enUS = function()
   L["ALT"] = "ALT"
   L["NEVER"] = "Never"
   L["ALWAYS"] = "Always"
+  L["BID_ONLY_PRICE_CONFIRMATION"] = "This price is based on the bid of an auction without a buyout price. Such an auction can't be bought right away, and its bid may be far below the usual price. Post at this price?"
 
   return L
 end
