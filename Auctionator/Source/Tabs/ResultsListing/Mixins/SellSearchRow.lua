@@ -1,9 +1,6 @@
 AuctionatorSellSearchRowMixin = CreateFromMixins(AuctionatorResultsRowTemplateMixin)
 
 local function BuyEntry(entry)
-  if entry.itemType == Auctionator.Constants.ITEM_TYPES.COMMODITY then
-    C_AuctionHouse.StartCommoditiesPurchase(entry.itemID, entry.quantity)
-  end
   Auctionator.EventBus
     :RegisterSource(BuyEntry, "BuyEntry")
     :Fire(BuyEntry, Auctionator.Selling.Events.ConfirmCallback, entry)
@@ -47,7 +44,7 @@ function AuctionatorSellSearchRowMixin:OnClick(button, ...)
   else
     Auctionator.EventBus
       :RegisterSource(self, "SellSearchRow")
-      :Fire(self, Auctionator.Selling.Events.PriceSelected, self.rowData.price or self.rowData.bidPrice, true)
+      :Fire(self, Auctionator.Selling.Events.PriceSelected, self.rowData.price or self.rowData.bidPrice, true, self.rowData.price == nil and self.rowData.owned ~= AUCTIONATOR_L_UNDERCUT_YES)
       :UnregisterSource(self)
   end
 end

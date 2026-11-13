@@ -42,7 +42,7 @@ function AuctionatorScrollListLineMixin:GetListIndex()
 end
 
 function AuctionatorScrollListLineMixin:DeleteItem()
-  if not self:IsEnabled() then
+  if self:IsEnabled() ~= 1 then
     return
   end
 
@@ -53,7 +53,7 @@ function AuctionatorScrollListLineMixin:DeleteItem()
 end
 
 function AuctionatorScrollListLineMixin:EditItem()
-  if not self:IsEnabled() then
+  if self:IsEnabled() ~= 1 then
     return
   end
 

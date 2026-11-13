@@ -2,6 +2,7 @@ function Auctionator.Utilities.DelimitThousands(num)
   local separator = ","
 
   local formatted = num
+  local k
   while true do  
     formatted, k = string.gsub(
       formatted,

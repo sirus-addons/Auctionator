@@ -49,7 +49,7 @@
     </Scripts>
   </Frame>
 
-  <Frame name="AuctionatorInsetLeaveScrollSpaceMixin" useParentLevel="true" virtual="true">
+  <Frame name="AuctionatorInsetLeaveScrollSpaceTemplate" useParentLevel="true" virtual="true">
     <Attributes>
       <Attribute name="layoutType" value="InsetFrameTemplate" type="string"/>
     </Attributes>
@@ -68,7 +68,7 @@
     </Frames>
     <Scripts>
       <OnLoad>
-        Mixin(self, AuctionatorInsetMixin)
+        Mixin(self, AuctionatorInsetLeaveScrollSpaceMixin)
         self:OnLoad()
       </OnLoad>
     </Scripts>

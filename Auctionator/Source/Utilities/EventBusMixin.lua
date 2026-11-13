@@ -87,7 +87,9 @@ function AuctionatorEventBusMixin:Fire(source, eventName, ...)
         #self.registeredListeners[current.eventName]
       )
       for _, listener in ipairs(allListeners) do
-        listener:ReceiveEvent(current.eventName, unpack(current.params))
+        xpcall(function()
+          listener:ReceiveEvent(current.eventName, unpack(current.params))
+        end, geterrorhandler())
       end
     end
 

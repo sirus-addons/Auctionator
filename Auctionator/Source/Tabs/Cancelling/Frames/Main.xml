@@ -14,10 +14,13 @@
     </Anchors>
 
     <Frames>
-      <Button name="$parentRefresh" inherits="RefreshButtonTemplate">
+      <Button name="$parentRefresh" inherits="SquareIconButtonTemplate">
         <Anchors>
             <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="-44" y="65"/>
         </Anchors>
+        <Attributes>
+          <Attribute name="iconAtlas" value="UI-RefreshButton" type="string"/>
+        </Attributes>
         <Scripts>
           <OnClick>
             self:GetParent():RefreshButtonClicked()

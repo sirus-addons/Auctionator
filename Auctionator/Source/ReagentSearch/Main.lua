@@ -41,7 +41,6 @@ function Auctionator.ReagentSearch.GetSkillReagentsTotal()
         unitPrice = Auctionator.API.v1.GetAuctionPriceByItemLink(AUCTIONATOR_L_REAGENT_SEARCH, link)
       end
 
-      local unitPrice = Auctionator.API.v1.GetAuctionPriceByItemLink(AUCTIONATOR_L_REAGENT_SEARCH, link)
       if unitPrice ~= nil then
         total = total + reagentCount * unitPrice
       end
@@ -82,11 +81,11 @@ end
 
 function Auctionator.ReagentSearch.CacheVendorPrices()
   for i = 1, GetMerchantNumItems() do
-    local price, _, numAvailable = select(3, GetMerchantItemInfo(i))
+    local price, quantity, numAvailable = select(3, GetMerchantItemInfo(i))
     local itemLink = GetMerchantItemLink(i)
     local dbKey = Auctionator.Utilities.BasicDBKeyFromLink(itemLink)
     if dbKey ~= nil and price ~= 0 and numAvailable == -1 then
-      AUCTIONATOR_VENDOR_PRICE_CACHE[dbKey] = price
+      AUCTIONATOR_VENDOR_PRICE_CACHE[dbKey] = price / quantity
     elseif dbKey ~= nil then
       AUCTIONATOR_VENDOR_PRICE_CACHE[dbKey] = nil
     end

@@ -111,7 +111,7 @@ for _, classID in ipairs( ITEM_CLASS_IDS ) do
 
   local categoryCategory = Auctionator.Search.Category:new({
     classID = classID,
-    name = name,
+    name = key,
     key = key,
     category = {category},
     subClasses = subClasses

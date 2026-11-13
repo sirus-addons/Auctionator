@@ -4,7 +4,7 @@ function AuctionatorScrollListLineButtonMixin:OnShow()
   self.hoverTexture:Hide()
 end
 function AuctionatorScrollListLineButtonMixin:OnEnter()
-  if self:GetParent():IsEnabled() then
+  if self:GetParent():IsEnabled() == 1 then
     self.hoverTexture:Show()
 
     if self.tooltipTitleText ~= nil then

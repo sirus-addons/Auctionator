@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-  <Frame name="AuctionatorSplashScreenTemplate" virtual="true" inherits="SimplePanelTemplate_NineSlice" frameStrata="DIALOG" hidden="true">
+  <Frame name="AuctionatorSplashScreenTemplate" virtual="true" frameStrata="DIALOG" hidden="true">
     <Scripts>
       <OnLoad>
         Mixin(self, AuctionatorSplashScreenMixin)
