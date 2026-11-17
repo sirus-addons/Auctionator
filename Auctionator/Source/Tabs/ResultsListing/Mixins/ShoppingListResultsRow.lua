@@ -5,23 +5,21 @@ local wasOnShoppingTab = false
 
 local function ModifyBuyBackButton()
   -- Modify click handler to return to the shopping tab
-  hooksecurefunc(AuctionHouseCommoditiesBackButtonMixin, "OnClick",
-    function()
-      if wasOnShoppingTab then
-        AuctionatorTabs_ShoppingLists:Click()
-      end
+  local function OnClick()
+    if wasOnShoppingTab then
+      AuctionatorTabs_ShoppingLists:Click()
     end
-  )
-  AuctionHouseFrame.CommoditiesBuyFrame.BackButton:SetScript("OnClick", AuctionHouseCommoditiesBackButtonMixin.OnClick)
-  AuctionHouseFrame.ItemBuyFrame.BackButton:SetScript("OnClick", AuctionHouseCommoditiesBackButtonMixin.OnClick)
+  end
+  AuctionHouseFrame.CommoditiesBuyFrame.BackButton:HookScript("OnClick", OnClick)
+  AuctionHouseFrame.ItemBuyFrame.BackButton:HookScript("OnClick", OnClick)
 
   -- Detection of whether the user was on the "Shopping" tab. Toggle
   -- wasOnShoppingTab to true after the button displays.
   local function OnShow(self)
     wasOnShoppingTab = false
   end
-  AuctionHouseFrame.CommoditiesBuyFrame.BackButton:SetScript("OnShow", OnShow)
-  AuctionHouseFrame.ItemBuyFrame.BackButton:SetScript("OnShow", OnShow)
+  AuctionHouseFrame.CommoditiesBuyFrame.BackButton:HookScript("OnShow", OnShow)
+  AuctionHouseFrame.ItemBuyFrame.BackButton:HookScript("OnShow", OnShow)
 end
 
 function AuctionatorShoppingListResultsRowMixin:OnClick(button, ...)

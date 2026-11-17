@@ -28,8 +28,12 @@ end
 
 -- All "realms" that are connected together use the same AH database, this
 -- determines which database is in use.
+local function NormalizeRealmName(realm)
+  return (string.gsub(realm, "^Proxy%a* ", ""))
+end
+
 function Auctionator.Variables.GetConnectedRealmRoot()
-  local currentRealm = GetRealmName()
+  local currentRealm = NormalizeRealmName(GetRealmName())
   local connections = {} -- TODO: GetAutoCompleteRealms()
 
   -- We sort so that we always get the same first realm to use for the database
@@ -49,7 +53,13 @@ end
 --
 -- Assumes rootRealm has no active database
 local function ImportFromConnectedRealm(rootRealm)
-  local connections = {} -- TODO: GetAutoCompleteRealms()
+  local connections = {}
+  for realm in pairs(AUCTIONATOR_PRICE_DATABASE) do
+    if realm ~= "__dbversion" and NormalizeRealmName(realm) == rootRealm then
+      table.insert(connections, realm)
+    end
+  end
+  table.sort(connections)
 
   if #connections == 0 then
     return false

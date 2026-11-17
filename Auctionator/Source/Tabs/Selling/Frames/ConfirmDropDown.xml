@@ -1,11 +1,12 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-  <Frame name="AuctionatorConfirmDropDownTemplate" inherits="UIDropDownMenuTemplate" virtual="true">
+  <Frame name="AuctionatorConfirmDropDownTemplate" virtual="true">
     <Scripts>
       <OnLoad>
         Mixin(self, AuctionatorConfirmDropDownMixin)
         self:OnLoad()
       </OnLoad>
       <OnHide>self:OnHide()</OnHide>
+      <OnEvent>self:OnEvent(event, ...)</OnEvent>
     </Scripts>
   </Frame>
 </Ui>

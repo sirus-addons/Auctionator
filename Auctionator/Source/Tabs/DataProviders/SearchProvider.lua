@@ -143,7 +143,7 @@ function AuctionatorSearchDataProviderMixin:OnEvent(eventName, itemRef, auctionI
 
   else
     if eventName == "AUCTION_CANCELED" then
-      self:UnregisterEvent("AUCTION_CANCELED")
+      self:UnregisterCustomEvent("AUCTION_CANCELED")
     end
 
     self.onPreserveScroll()

@@ -264,7 +264,7 @@ L["SET_VALUE"] = "Заданное Значение"
 L["SET_VALUE_SUFFIX"] = "Снижение цены"
 L["SHIFT_LEFT_CLICK"] = "Shift ЛКМ"
 L["SHIFT_RIGHT_CLICK"] = "Shift ПКМ"
-L["SHOPPING_TAB"] = "Купить"
+L["SHOPPING_TAB"] = "Покупки"
 L["SHOPPING_TAB_HEADER"] = "Auctionator - Список Покупок"
 L["SKIP"] = "Пропустить"
 L["SPLASH_830_BUGS_1"] = "Пожалуйста, присоединяйтесь к нам в Auctionator Discord %s"
@@ -408,6 +408,7 @@ L["CONTROL"] = "CONTROL"
 L["ALT"] = "ALT"
 L["NEVER"] = "Никогда"
 L["ALWAYS"] = "Всегда"
+L["BID_ONLY_PRICE_CONFIRMATION"] = "Цена взята по ставке лота без цены выкупа. Такой лот нельзя выкупить сразу, а его ставка может быть намного ниже обычной цены. Выставить по этой цене?"
 
   return L
 end

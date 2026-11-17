@@ -69,7 +69,7 @@ local function ShouldInclude(itemKey)
   if Auctionator.Config.Get(Auctionator.Config.Options.UNDERCUT_SCAN_NOT_LIFO) then
     return true
   else
-    local classType = select(6, GetItemInfo(itemLink))
+    local classType = select(6, GetItemInfo(itemKey.itemID))
     return classType ~= ITEM_CLASS_2 and classType ~= ITEM_CLASS_4
   end
 end
@@ -140,7 +140,7 @@ function AuctionatorUndercutScanMixin:ReceiveEvent(eventName, auctionID)
       end
     end
   elseif eventName == Auctionator.Cancelling.Events.RequestCancelUndercut then
-    if self.CancelNextButton:IsEnabled() then
+    if self.CancelNextButton:IsEnabled() == 1 then
       self:CancelNextAuction()
     end
   elseif eventName == Auctionator.AH.Events.Ready then
@@ -243,10 +243,7 @@ function AuctionatorUndercutScanMixin:CancelAllAuctions()
     local info = C_AuctionHouse.GetOwnedAuctionInfo(index)
 
     if info and info.auctionID then
-      Auctionator.EventBus
-        :RegisterSource(self, "CancelAllAuctions")
-        :Fire(self, Auctionator.Cancelling.Events.RequestAllCancel, info.auctionID)
-        :UnregisterSource(self)
+      Auctionator.EventBus:Fire(self, Auctionator.Cancelling.Events.RequestAllCancel, info.auctionID)
     end
   end
 end

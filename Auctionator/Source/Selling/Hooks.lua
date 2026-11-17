@@ -1,5 +1,6 @@
 local function SelectOwnItem(self)
-  local itemLocation = ItemLocation:CreateFromBagAndSlot(self:GetParent():GetID(), self:GetID());
+  local bagID = self.GetBagID and self:GetBagID() or self:GetParent():GetID()
+  local itemLocation = ItemLocation:CreateFromBagAndSlot(bagID, self:GetID());
 
   if not itemLocation:IsValid() or not C_AuctionHouse.IsSellItemValid(itemLocation) then
     return

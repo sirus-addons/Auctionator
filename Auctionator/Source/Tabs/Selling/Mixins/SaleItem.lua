@@ -33,6 +33,18 @@ local function IsValidItem(item)
     item.location:IsValid()
 end
 
+StaticPopupDialogs[Auctionator.Constants.DialogNames.ConfirmBidOnlyPrice] = {
+  text = "%s\n" .. BUYOUT_PRICE .. ": %s\n\n" .. AUCTIONATOR_L_BID_ONLY_PRICE_CONFIRMATION,
+  button1 = ACCEPT,
+  button2 = CANCEL,
+  OnAccept = function(self, frame, price)
+    frame:PostItem(price)
+  end,
+  timeout = 0,
+  exclusive = 1,
+  whileDead = 1,
+  hideOnEscape = 1
+}
 
 AuctionatorSaleItemMixin = {}
 
@@ -76,6 +88,7 @@ function AuctionatorSaleItemMixin:OnHide()
     Auctionator.Components.Events.EnterPressed,
   })
   Auctionator.EventBus:UnregisterSource(self)
+  StaticPopup_Hide(Auctionator.Constants.DialogNames.ConfirmBidOnlyPrice)
   self:UnlockItem()
   ClearOverrideBindings(self)
 end
@@ -184,7 +197,7 @@ function AuctionatorSaleItemMixin:ReceiveEvent(event, ...)
 
   elseif event == Auctionator.Selling.Events.PriceSelected and
          self.itemInfo ~= nil then
-    local buyoutAmount, shouldUndercut = ...
+    local buyoutAmount, shouldUndercut, isBidOnly = ...
 
     if shouldUndercut then
       if Auctionator.Utilities.IsNotLIFOItemKey(self.itemInfo.itemKey) then
@@ -194,7 +207,7 @@ function AuctionatorSaleItemMixin:ReceiveEvent(event, ...)
       end
     end
 
-    self:UpdateSalesPrice(buyoutAmount)
+    self:UpdateSalesPrice(buyoutAmount, isBidOnly)
 
   elseif event == Auctionator.Selling.Events.RefreshSearch then
     self:RefreshButtonClicked()
@@ -338,13 +351,15 @@ function AuctionatorSaleItemMixin:Reset()
   self:Update()
 end
 
-function AuctionatorSaleItemMixin:UpdateSalesPrice(salesPrice)
+function AuctionatorSaleItemMixin:UpdateSalesPrice(salesPrice, isBidOnly)
   if salesPrice == 0 then
     self.Price:SetAmount(0)
   else
     self.Price:SetAmount(NormalizePrice(salesPrice))
   end
   self.BidPrice:Clear()
+  self.bidOnlyPrice = isBidOnly and self.Price:GetAmount() or nil
+  StaticPopup_Hide(Auctionator.Constants.DialogNames.ConfirmBidOnlyPrice)
 end
 
 function AuctionatorSaleItemMixin:SetEquipmentMultiplier(itemLink)
@@ -473,9 +488,9 @@ function AuctionatorSaleItemMixin:ProcessItemResults(itemKey)
   local result = self:GetItemResult(itemKey)
 
   -- Update DB with current lowest price
-  if result ~= nil then
+  if result ~= nil and result.buyoutAmount ~= nil then
     for _, key in ipairs(dbKeys) do
-      Auctionator.Database:SetPrice(key, result.buyoutAmount or result.bidAmount)
+      Auctionator.Database:SetPrice(key, result.buyoutAmount)
     end
   end
 
@@ -503,7 +518,30 @@ function AuctionatorSaleItemMixin:ProcessItemResults(itemKey)
     return
   end
 
-  self:UpdateSalesPrice(postingPrice)
+  self:UpdateSalesPrice(postingPrice, result ~= nil and result.buyoutAmount == nil and not result.containsOwnerItem)
+end
+
+function AuctionatorSaleItemMixin:GetPostPriceTotal()
+  if self.itemInfo.itemType == Auctionator.Constants.ITEM_TYPES.ITEM then
+    return self.Price:GetAmount()
+  else
+    return self.Price:GetAmount() * self.Quantity:GetNumber()
+  end
+end
+
+function AuctionatorSaleItemMixin:GetMaxPriceError()
+  if self.itemInfo == nil then
+    return nil
+  end
+
+  local maxBidPrice, isLevel = C_AuctionHouse.GetMaxBidPrice()
+  if self:GetPostPriceTotal() <= maxBidPrice then
+    return nil
+  elseif isLevel then
+    return AUCTION_HOUSE_SELL_FRAME_ERROR_MAX_PRICE_LEVEL:format(maxBidPrice / 10000)
+  else
+    return AUCTION_HOUSE_SELL_FRAME_ERROR_MAX_PRICE
+  end
 end
 
 function AuctionatorSaleItemMixin:GetPostButtonState()
@@ -526,6 +564,8 @@ function AuctionatorSaleItemMixin:GetPostButtonState()
     -- Bid price is not bigger than buyout
     self.BidPrice:GetAmount() <= self.Price:GetAmount() and
 
+    self:GetMaxPriceError() == nil and
+
     -- Not throttled (to avoid silent post failure)
     Auctionator.AH.IsNotThrottled()
 end
@@ -536,6 +576,7 @@ function AuctionatorSaleItemMixin:UpdatePostButtonState()
   else
     self.PostButton:Disable()
   end
+  self.PostButton.tooltip = self:GetMaxPriceError()
 end
 
 function AuctionatorSaleItemMixin:UpdateSkipButtonState()
@@ -552,7 +593,7 @@ function AuctionatorSaleItemMixin:GetDuration()
   return AUCTION_DURATIONS[self.Duration:GetValue()]
 end
 
-function AuctionatorSaleItemMixin:PostItem()
+function AuctionatorSaleItemMixin:PostItem(confirmedPrice)
   if not self:GetPostButtonState() then
     Auctionator.Debug.Message("Trying to post when we can't. Returning")
     return
@@ -563,6 +604,19 @@ function AuctionatorSaleItemMixin:PostItem()
   local startingBid = self.BidPrice:GetAmount()
   local buyout = self.Price:GetAmount()
   local bidAmountReported = nil -- Only includes bid price when non-zero and for an item
+
+  if self.bidOnlyPrice ~= nil and buyout <= self.bidOnlyPrice and buyout ~= confirmedPrice then
+    local dialog = StaticPopup_Show(
+      Auctionator.Constants.DialogNames.ConfirmBidOnlyPrice,
+      AUCTION_HOUSE_DIALOG_ITEM_FORMAT:format(self.itemInfo.itemLink, quantity),
+      Auctionator.Utilities.CreateMoneyString(buyout),
+      self
+    )
+    if dialog then
+      dialog.data2 = buyout
+    end
+    return
+  end
 
   self.MultisellProgress:SetDetails(self.itemInfo.iconTexture, quantity)
 
@@ -608,7 +662,7 @@ function AuctionatorSaleItemMixin:PostItem()
 end
 
 function AuctionatorSaleItemMixin:SkipItem()
-  if self.SkipButton:IsEnabled() then
+  if self.SkipButton:IsEnabled() == 1 then
     Auctionator.EventBus:Fire(
       self, Auctionator.Selling.Events.BagItemClicked, self.itemInfo.nextItem
     )

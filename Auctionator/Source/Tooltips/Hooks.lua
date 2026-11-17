@@ -70,7 +70,8 @@ hooksecurefunc (GameTooltip, "SetTradeSkillItem",
 hooksecurefunc (GameTooltip, "SetLootItem",
   function (tip, slot)
     if LootSlotIsItem(slot) then
-      local itemLink, _, itemCount = GetLootSlotLink(slot);
+      local itemLink = GetLootSlotLink(slot);
+      local _, _, itemCount = GetLootSlotInfo(slot);
 
       Auctionator.Tooltip.ShowTipWithPricing(tip, itemLink, itemCount)
     end
@@ -105,7 +106,7 @@ hooksecurefunc (GameTooltip, "SetQuestLogItem",
   function (tip, type, index)
     local itemLink = GetQuestLogItemLink(type, index)
 
-    local itemCount;
+    local _, itemCount;
     if type == "choice" then
       _, _, itemCount = GetQuestLogChoiceInfo(index);
     else
@@ -119,7 +120,7 @@ hooksecurefunc (GameTooltip, "SetQuestLogItem",
 -- This is called when mousing over an item in the send mail window
 hooksecurefunc (GameTooltip, "SetSendMailItem",
   function (tip, id)
-    local _, _, _, itemCount = GetSendMailItem(id)
+    local _, _, itemCount = GetSendMailItem(id)
     local itemLink = GetSendMailItemLink(id);
 
     Auctionator.Tooltip.ShowTipWithPricing(tip, itemLink, itemCount)
@@ -136,7 +137,7 @@ hooksecurefunc (GameTooltip, "SetInboxItem",
 
       local itemLink = GetInboxItemLink(index, attachmentIndex)
 
-      local _, _, _, itemCount = GetInboxItem(index, attachmentIndex);
+      local _, _, itemCount = GetInboxItem(index, attachmentIndex);
 
       Auctionator.Tooltip.ShowTipWithPricing(tip, itemLink, itemCount)
     end
@@ -156,10 +157,10 @@ hooksecurefunc("InboxFrameItem_OnEnter",
 
     if tooltipEnabled and itemCount and itemCount > 1 then
       local itemEntries = {}
-      local name, itemCount, itemLink
+      local _, name, itemCount, itemLink
 
       for attachmentIndex = 1, ATTACHMENTS_MAX_RECEIVE do
-        name, _, _, itemCount = GetInboxItem(self.index, attachmentIndex)
+        name, _, itemCount = GetInboxItem(self.index, attachmentIndex)
 
         if name then
           itemLink = GetInboxItemLink(self.index, attachmentIndex)

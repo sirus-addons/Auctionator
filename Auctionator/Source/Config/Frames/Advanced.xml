@@ -16,23 +16,12 @@
         </Attributes>
       </Frame>
 
-      <Frame name="$parentNotReplicateScan" inherits="AuctionatorConfigurationCheckbox" parentKey="NotReplicateScan">
-        <Attributes>
-          <Attribute name="labelText" value="AUCTIONATOR_L_CONFIG_ALTERNATE_SCAN" type="string" />
-          <Attribute name="tooltipTitleText" value="AUCTIONATOR_L_CONFIG_ALTERNATE_SCAN_HEADER" type="string" />
-          <Attribute name="tooltipText" value="AUCTIONATOR_L_CONFIG_ALTERNATE_SCAN_TEXT" type="string"/>
-        </Attributes>
-        <Anchors>
-          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT" />
-        </Anchors>
-      </Frame>
-
       <Frame name="$parentDebugHeading" inherits="AuctionatorConfigurationHeadingFrame" parentKey="DebugHeading">
         <Attributes>
           <Attribute name="headingText" value="AUCTIONATOR_L_CONFIG_DEVELOPER" type="string"/>
         </Attributes>
         <Anchors>
-          <Anchor point="TOPLEFT" relativeTo="$parentNotReplicateScan" relativePoint="BOTTOMLEFT"/>
+          <Anchor point="TOPLEFT" relativeTo="$parentTitleArea" relativePoint="BOTTOMLEFT"/>
         </Anchors>
       </Frame>
 
